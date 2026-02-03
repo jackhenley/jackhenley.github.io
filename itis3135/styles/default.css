@@ -1,0 +1,54 @@
+/* CSS HSL from coolors.co*/
+/* --coffee-bean: rgb(71, 32, 2);
+--thistle: hsla(275, 18%, 79%, 1);
+--tea-green: hsla(108, 100%, 89%, 1);
+--indigo-velvet: hsla(253, 51%, 39%, 1);
+--school-bus-yellow: hsla(47, 100%, 50%, 1);
+ */
+
+header a {
+  color: hsla(108, 100%, 89%, 1);
+  font-size: 18px;
+  font-family: frutiger, sans-serif;
+  background-color: rgb(71, 32, 2);
+  padding: 5px 5px 5px 5px;
+  text-decoration: none;
+  max-width: 10px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: hsla(47, 100%, 50%, 1);
+  font-family: archivo-black;
+  max-width: fit-content;
+  margin: auto;
+}
+
+body {
+  background-color: hsla(253, 51%, 39%, 1);
+}
+
+h2 {
+  color: hsla(275, 18%, 79%, 1);
+  font-family: Frutiger, sans-serif;
+}
+
+p {
+  font-family: Frutiger, sans-serif;
+  color: hsla(108, 100%, 89%, 1);
+  font-size: 18px;
+  max-width: 800px;
+  margin: 10px 20px 10px 20px;
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
+footer a {
+  color: hsla(108, 100%, 89%, 1);
+  font-size: 18px;
+  font-family: frutiger, sans-serif;
+  text-decoration: underline wavy;
+}
