@@ -1,0 +1,52 @@
+/* CSS HSL */
+/* --charcoal-brown: hsla(34, 6%, 24%, 1);
+--aquamarine: hsla(150, 97%, 85%, 1);
+--mauve: hsla(265, 100%, 87%, 1);
+--amber-earth: hsla(33, 83%, 50%, 1);
+--crayola-blue: hsla(221, 100%, 61%, 1); */
+
+header {
+}
+
+body {
+  background-color: rgb(161, 161, 161);
+  max-width: 900px;
+  margin: auto;
+}
+
+body p {
+  color: hsla(34, 6%, 24%, 1);
+  padding-bottom: 20px;
+}
+
+body nav {
+  background-color: hsla(221, 100%, 61%, 1);
+  padding: 10px;
+}
+
+body nav a {
+  color: hsla(150, 97%, 85%, 1);
+  font-size: 18px;
+  padding: 80px;
+}
+
+h1 {
+  color: hsla(221, 100%, 61%, 1);
+}
+
+h2 {
+  color: hsla(33, 83%, 50%, 1);
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
+
+footer a {
+  color: hsla(150, 97%, 85%, 1);
+  font-size: 22px;
+  text-decoration-color: hsla(33, 83%, 50%, 1);
+  text-decoration: wavy underline;
+}
