@@ -24,11 +24,27 @@
             text-align: left;
         }
 
+        .intro-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
         header h1 {
             color: #785964;
             font-family: 'lato', sans-serif;
         }
         header h2 {
+            color: #785964;
+            font-family:'Lato', sans-serif;
+        }
+
+        #contact-info h3 {
             color: #785964;
             font-family:'Lato', sans-serif;
         }
@@ -57,19 +73,27 @@
        #company-logo {
         width: 250px;
         height: auto;
-        float: right;
-        background-color: #93B7BE;
+        background-color: #F1FFFA;
        } 
+
+       #contact-info {
+        background-color: #D5C7BC;
+        padding: 20px;
+        margin-top: 20px;
+       }
     </style>
 </head>
 <body>
     <header>
         <h1>Jack Henley Designs</h1>
-        <figure>
-            <img src="JHDLogoNobg.png" id="company-logo" alt="My company logo">
-        </figure>
-        <h2>Home</h2>
-
+        <div class="intro-container">
+            <div class="intro-text">
+                <h2>Home</h2>
+            </div>
+            <figure>
+                <img src="JHDLogoNobg.png" id="company-logo" alt="My company logo">
+            </figure>
+        </div>
     </header>
     <main>
         <p>At Jack Henley Designs, our goal is to design your website to 
@@ -79,12 +103,20 @@
             making a customer for life. 
         </p>
         <ul>
-            <li>Good thing one</li>
-            <li>Good thing two</li>
-            <li>Good thing three</li>
-            <li>Good thing four</li>
-            <li>Good thing five</li>
+            <li>We care about customer satisfaction</li>
+            <li>We follow the CRAP principals</li>
+            <li>We are committed to quality</li>
+            <li>We deliver our products on time</li>
+            <li>We are responsive to customer needs</li>
         </ul>
+        <section id="contact-info">
+            <h3>Contact Us</h3>
+            <p>Phone: 555-555-5555</p>
+            <p>Email: jackhenleydesigns@yoohoo.co</p>
+            <p>Address: 246 Mane Street, Shreveport, USA</p>
+        </section>
+
+
     </main>
     <footer></footer>
 </body>
