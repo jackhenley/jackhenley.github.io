@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowboarding | Hobby Site</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <style>
+        :root {
+            /* CSS HEX */
+            --sea-green: #519872ff;
+            --charcoal: #4c4c47ff;
+            --lavender-grey: #848fa5ff;
+            --dark-amethyst: #23022eff;
+            --sand-dune: #e5dcc5ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--charcoal);
+            color: var(--sand-dune);
+            cursor: url('/images/snowboarder.svg') 16 16, auto;
+        }
+
+        nav {
+            background-color: var(--dark-amethyst);
+            color: var(--sea-green);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .section-link {
+            color: var(--bronze);
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        .section-link:hover {
+            background-color: var(--charcoal);
+        }
+
+        .section-link.active {
+            background-color: var(--charcoal);
+        }
+
+        section {
+            padding: 20px;
+            height: 100vh;
+            display: none;
+            background-color: var(--lavender-grey);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        section h2 {
+            margin: 0 auto 1.5rem auto;
+            font-family: 'bebas neue', sans-serif;
+            font-weight: 400;
+            text-align: center;
+            font-size: 3rem;
+        }
+
+        section p {
+            line-height: 1.6;
+        }
+
+
+        /**Section specific Styling**/
+
+        /**Who**/
+        #who figure {
+            float: left;
+            width: 50%;
+            margin: 0 1rem 1rem 0;
+        }
+
+        #who figure img {
+            width: 100%;
+            max-width: none;
+            padding: 0;
+        }
+
+        #who figure figcaption {
+            width: 100%;
+            text-align: left;
+            font-style: italic;
+            margin-top: 8px;
+            padding-right: 0px;
+        }
+
+        #who figure figcaption a {
+            color: var(--sand-dune);
+            text-decoration: underline;
+        }
+
+        /**What**/
+        .what-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #what a {
+            color: var(--sand-dune);
+            text-decoration: underline;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+               /**Snowboard-related CSS**/
+        .scene {
+            background: var(--lavender-grey);
+            /**padding: 0.5rem 1rem;**/
+            position: relative;
+        }
+
+        .scene::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        pre#board {
+            font-family: 'bebas neue', monospace;
+            font-size: 11px;
+            line-height: 1.15;
+            color: var(--sand-dune);
+            white-space: pre;
+            text-shadow: 0px 0px 8px var(--charcoal);
+            min-width: 780px;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /**When**/
+        #when p {
+            float: right;
+            text-align: right;
+            padding: 1.5rem;
+            margin: auto;
+            
+        }
+
+        #when figure {
+            text-align: left;
+        }
+
+        #when figure img {
+            width: 50%;
+            max-width: none;
+
+        }
+
+        #when figure figcaption p {
+            float: left;
+            padding: 1rem;
+            margin: auto;
+        }
+
+        #when figure figcaption a{
+            font-style: italic;
+            text-decoration: underline;
+            color: var(--sand-dune)
+
+        }
+
+        /**Where**/ 
+        #where iframe {
+            float: left;
+            width: 40%;
+            height: 40%;
+        }
+
+        #where figure {
+            float: right;
+            width: 50%;
+        }
+
+        #where figure img {
+            max-width: 70%;
+            max-height: auto;
+            border-radius: 15%;
+        }
+
+        #where p {
+            clear: both;
+        }
+
+
+        /**How**/
+
+
+        #how uL {
+            list-style: square;
+            padding-left: 1.5rem;
+        }
+
+        #how ul li {
+            margin: 0.5rem 0;
+        }
+
+        #how figure {
+            margin: 1.5rem auto;
+            text-align: center;
+        }
+
+        #how figure img {
+            border-width: 2px;
+            border-color: var(--sand-dune);
+            border-style: solid;
+        }
+
+        #how figure figcaption p {
+            font-style: italic;
+            text-decoration: none;
+            color: var(--sand-dune);
+        }
+
+        #how figure figcaption a {
+            color: var(--sand-dune);
+            text-decoration: underline;
+        }
+
+
+        /**Why**/
+        #why figure {
+            margin: 1.5rem auto;
+            text-align: center;
+        }
+
+        #why figure figcaption p {
+            font-style: italic;
+            text-decoration: none;
+            color: var(--sand-dune);
+        }
+
+        #why figure figcaption a {
+            color: var(--sand-dune);
+            text-decoration: underline;
+        }
+
+
+        /**AI Prompts**/
+
+        #ai-prompts h3 {
+            text-decoration: underline;
+        } 
+
+        #ai-prompts p {
+            margin-bottom: 1.5rem;
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sectionLinks = document.querySelectorAll('.section-link');
+            const sections = document.querySelectorAll('section');
+
+            // helper to activate a section by id
+            function activateSection(id) {
+                const targetSection = document.getElementById(id);
+                const targetLink = document.querySelector(`.section-link[href="#${id}"]`);
+                if (!targetSection || !targetLink) return false;
+
+                // hide all
+                sections.forEach(section => section.classList.remove('active'));
+                sectionLinks.forEach(link => link.classList.remove('active'));
+
+                targetSection.classList.add('active');
+                targetLink.classList.add('active');
+                return true;
+            }
+
+            // determine which section should be shown on load
+            // priority: hash in URL -> localStorage -> default first section
+            let initialId = null;
+            if (window.location.hash) {
+                initialId = window.location.hash.substring(1);
+            }
+            if (!initialId) {
+                initialId = localStorage.getItem('activeSection');
+            }
+            if (!initialId && sections.length > 0) {
+                initialId = sections[0].id;
+            }
+
+            if (initialId) {
+                activateSection(initialId);
+            }
+
+            sectionLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent default link behavior
+
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (activateSection(targetId)) {
+                        // store selection so it persists on reload
+                        localStorage.setItem('activeSection', targetId);
+                        // update URL hash without scrolling
+                        history.replaceState(null, '', `#${targetId}`);
+                    }
+                });
+            });
+
+            // if user manually changes the hash, update active section
+            window.addEventListener('hashchange', () => {
+                const newId = window.location.hash.substring(1);
+                if (newId) {
+                    activateSection(newId);
+                    localStorage.setItem('activeSection', newId);
+                }
+            });
+        });
+        /**
+        //test function to change text in a paragraph dynamically
+        function changeText() {
+            // Generate a random text snippet
+            const randomText = "The password to the secret section is " +
+                Math.random().toString(36).substring(2, 15) + "!";
+
+            // Change the paragraph's text
+            const paragraph = document.getElementById("my-paragraph");
+            if (paragraph) {
+                paragraph.textContent = randomText; // Use textContent for text changes
+            }
+        }
+
+        // Initialize changeText when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Call the function initially
+            changeText();
+
+            // Call the function repeatedly every 0.5 seconds
+            setInterval(changeText, 500);
+        });
+        **/
+    </script>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#who" class="section-link">Who</a>
+        <a href="#what" class="section-link">What</a>
+        <a href="#when" class="section-link">When</a>
+        <a href="#where" class="section-link">Where</a>
+        <a href="#how" class="section-link">How</a>
+        <a href="#why" class="section-link">Why</a>
+        <a href="#ai-prompts" class="section-link">AI Prompts</a>
+    </nav>
+
+    <section id="who">
+        <h2>Who</h2>
+        <figure>
+            <a href="https://www.flickr.com/photos/93969271@N03/12504147823" target="_blank" rel="author">
+            <img src="/images/snowboarderInAction.jpg" alt="Snowboarder mid-air"> 
+            </a>
+            <figcaption style="text-align:center; font-style:italic; margin-top:8px;"><p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/93969271@N03/12504147823">Snowboarding</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/93969271@N03">MarLeah Joy</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0 </a></p></figcaption>
+        </figure>
+        <p id="my-paragraph">My name is Jack Henley and something I really enjoy doing when it's cold out is snowboarding. Snowboarding is an awesome hobby, because anyone can do it. 
+            Although it may be intimidating for beginners who've only seen professionals doing crazy tricks, it's actually a very approachable hobby to anybody interested.
+            I personally grew up in Louisiana, and therefore was not able to get into snowboarding until I moved to Western North Caronlina about four years ago. However, 
+            something that I find special about snowboarding, is that it's fun no matter what stage of learning you're at!
+        </p>
+    </section>
+
+    <section id="what">
+        <h2>What</h2>
+        <div class="scene">
+            <pre id="board"></pre>
+        </div>
+        <script>
+            // ─────────────────────────────────────────────
+            //  ASCII Snowboard — donut.c style renderer
+            //  3D mesh → rotate → project → z-buffer → shade
+            // ─────────────────────────────────────────────
+
+            const W = 120, H = 48;
+            const SHADING = '.,:;i+olt#@';
+
+            // Build snowboard mesh as array of {x,y,z, nx,ny,nz, stripe}
+            // Board lies flat in XZ plane, thin in Y axis
+            // Shape: elongated capsule with nose/tail upward curve
+
+            function buildBoard() {
+                const verts = [];
+                const HALF_L = 2.2;   // half length
+                const HALF_W = 0.55;  // half width
+                const THICK = 0.07;  // half thickness
+                const CURVE = 0.32;  // nose/tail lift amount
+                const CURVE_START = 0.6; // fraction of board where curve begins
+
+                // Parametric surface: u along length [-1,1], v around width [-1,1]
+                // Top face, bottom face, and thin edge band
+
+                const uSteps = 60, vSteps = 18;
+
+                for (let ui = 0; ui <= uSteps; ui++) {
+                    for (let vi = 0; vi <= vSteps; vi++) {
+                        const u = (ui / uSteps) * 2 - 1; // -1 to 1 along length
+                        const v = (vi / vSteps) * 2 - 1; // -1 to 1 across width
+
+                        // Capsule shape: width tapers at ends
+                        const absU = Math.abs(u);
+                        let wScale = 1.0;
+                        if (absU > 0.80) {
+                            const t = (absU - 0.80) / 0.20;
+                            wScale = Math.sqrt(1 - t * t); // semicircle end cap
+                        }
+
+                        const px = u * HALF_L;
+                        const pz = v * HALF_W * wScale;
+
+                        // Nose/tail rocker curve
+                        let lift = 0;
+                        if (absU > CURVE_START) {
+                            const t = (absU - CURVE_START) / (1.0 - CURVE_START);
+                            lift = CURVE * t * t;
+                        }
+
+                        // Stripe pattern along length (board graphics)
+                        const stripeU = (u + 1) / 2; // 0..1
+                        // 3 stripes evenly spaced in the middle third of board width
+                        const stripeV = (v + 1) / 2; // 0..1
+                        const isStripe = (
+                            (stripeV > 0.30 && stripeV < 0.38) ||
+                            (stripeV > 0.48 && stripeV < 0.52) ||
+                            (stripeV > 0.62 && stripeV < 0.70)
+                        ) && absU < 0.75;
+
+                        // Top face normal: mostly (0,1,0) but tilted at curved ends
+                        let ny_top = 1, nz_top = 0;
+                        if (absU > CURVE_START) {
+                            const t = (absU - CURVE_START) / (1.0 - CURVE_START);
+                            const angle = Math.atan2(2 * CURVE * t, HALF_L * (1 - CURVE_START));
+                            ny_top = Math.cos(angle);
+                            nz_top = 0; // normal tangent is in XY plane
+                            // Actually the curve is in XY so the normal rotates in XY
+                        }
+
+                        // Top face
+                        verts.push({ x: px, y: THICK + lift, z: pz, nx: 0, ny: 1, nz: 0, stripe: isStripe, face: 'top' });
+                        // Bottom face
+                        verts.push({ x: px, y: -THICK + lift, z: pz, nx: 0, ny: -1, nz: 0, stripe: false, face: 'bot' });
+                    }
+                }
+
+                // Edge band around perimeter (thin side)
+                const edgeSteps = 80;
+                for (let ei = 0; ei <= edgeSteps; ei++) {
+                    const u = (ei / edgeSteps) * 2 - 1;
+                    const absU = Math.abs(u);
+                    let wScale = 1.0;
+                    if (absU > 0.80) {
+                        const t = (absU - 0.80) / 0.20;
+                        wScale = Math.sqrt(Math.max(0, 1 - t * t));
+                    }
+                    const px = u * HALF_L;
+                    let lift = 0;
+                    if (absU > CURVE_START) {
+                        const t = (absU - CURVE_START) / (1.0 - CURVE_START);
+                        lift = CURVE * t * t;
+                    }
+
+                    // Left edge
+                    verts.push({ x: px, y: lift, z: -HALF_W * wScale, nx: 0, ny: 0, nz: -1, stripe: false, face: 'edge' });
+                    // Right edge
+                    verts.push({ x: px, y: lift, z: HALF_W * wScale, nx: 0, ny: 0, nz: 1, stripe: false, face: 'edge' });
+                }
+
+                return verts;
+            }
+
+            const boardVerts = buildBoard();
+
+            // Rotation matrices
+            function rotX(p, a) {
+                const c = Math.cos(a), s = Math.sin(a);
+                return { x: p.x, y: p.y * c - p.z * s, z: p.y * s + p.z * c };
+            }
+            function rotY(p, a) {
+                const c = Math.cos(a), s = Math.sin(a);
+                return { x: p.x * c + p.z * s, y: p.y, z: -p.x * s + p.z * c };
+            }
+            function rotZ(p, a) {
+                const c = Math.cos(a), s = Math.sin(a);
+                return { x: p.x * c - p.y * s, y: p.x * s + p.y * c, z: p.z };
+            }
+
+            function render(A, B, C) {
+                // Output buffers
+                const output = new Array(W * H).fill(' ');
+                const zbuf = new Array(W * H).fill(-Infinity);
+
+                // Light direction (normalized)
+                const lx = 0.6, ly = 0.8, lz = -0.3;
+                const llen = Math.sqrt(lx * lx + ly * ly + lz * lz);
+                const Lx = lx / llen, Ly = ly / llen, Lz = lz / llen;
+
+                for (const v of boardVerts) {
+                    // Rotate vertex position
+                    let p = { x: v.x, y: v.y, z: v.z };
+                    p = rotX(p, A);
+                    p = rotY(p, B);
+                    p = rotZ(p, C);
+
+                    // Rotate normal
+                    let n = { x: v.nx, y: v.ny, z: v.nz };
+                    n = rotX(n, A);
+                    n = rotY(n, B);
+                    n = rotZ(n, C);
+
+                    // Perspective projection
+                    const dist = 5.5;
+                    const fov = 1.0 / (p.z + dist);
+                    // Aspect correction: characters are ~2x taller than wide
+                    const sx = Math.round(p.x * fov * (W * 0.38) + W / 2);
+                    const sy = Math.round(-p.y * fov * (H * 0.72) + H / 2);
+
+                    if (sx < 0 || sx >= W || sy < 0 || sy >= H) continue;
+
+                    const idx = sy * W + sx;
+                    if (p.z + dist <= 0) continue;
+                    const z = fov; // larger = closer
+
+                    if (z > zbuf[idx]) {
+                        zbuf[idx] = z;
+
+                        // Diffuse luminance
+                        const lum = n.x * Lx + n.y * Ly + n.z * Lz;
+                        const clamped = Math.max(0, lum);
+
+                        let charIdx;
+                        if (v.stripe) {
+                            // Stripes use bright chars
+                            charIdx = Math.floor(clamped * (SHADING.length - 3)) + 3;
+                        } else {
+                            charIdx = Math.floor(clamped * (SHADING.length - 1));
+                        }
+                        charIdx = Math.max(0, Math.min(SHADING.length - 1, charIdx));
+
+                        output[idx] = SHADING[charIdx];
+                    }
+                }
+
+                // Build string
+                let out = '';
+                for (let row = 0; row < H; row++) {
+                    out += output.slice(row * W, row * W + W).join('') + '\n';
+                }
+                return out;
+            }
+
+            // Animation loop — Y-axis spin with fixed tilt so shape is readable
+            const TILT_X = 0.42; // fixed downward tilt (radians) ~24°
+            const TILT_Z = 0.18; // slight roll tilt so it doesn't look perfectly flat
+            let B = 0;
+            const pre = document.getElementById('board');
+
+            function frame() {
+                B += 0.022; // slow Y-axis spin
+                pre.textContent = render(TILT_X, B, TILT_Z);
+                requestAnimationFrame(frame);
+            }
+
+            frame();
+        </script>
+
+        <p id="what-text">Snowboarding is a hobby that takes advantage of snowfall in mountainous areas. While people who snowboard are constantly innovating new ways to enjoy the hobby, 
+            at its core, snowboarding allows you to feel a way that's incomparable while shredding down your mountain of choice. The best way I can describe the sensation of snowboarding is 
+            what I imagine it feels like to fly. Because the bottom of your board is usually waxed, the contact between your board and the snow feels practically frictionless, and allows you to 
+            descend down mountains with speed. 
+        </p>
+
+        <a href="https://www.a1k0n.net/2011/07/20/donut-math.html" target="_blank">Inspiration for the ASCII snowboard animation.</a>
+    </section>
+
+    <section id="when">
+        <h2>When</h2>
+        <p>Snowboarding is obviously best enjoyed in the winter, assuming you're in North America. However, beyond that, 
+            there are actually some times of the winter that are better than others for snowboarding. In my opinion, the most ideal
+            time to snowboard on the east coast is late January to early Febuary. This is because any snow that's fallen has had time to layer
+            on top of previous snowfalls, which makes it much more pleasant to snowboard on. While it can be nice to go even later in the season, 
+            once it starts warming up, it's much more common to find ice on the mountainside, which can lead to pretty gnarly wipeouts if you're not
+            expecting it. 
+        </p>
+        <figure>
+            <a href="https://www.flickr.com/photos/29468339@N02/6710161193">
+            <img src="/images/winter.jpg" alt="Snowy mountain with ski lifts">
+            </a>
+            <figcaption><p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/29468339@N02/6710161193">Winter</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/29468339@N02">@Doug88888</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/2.0/?ref=openverse">CC BY-NC-SA 2.0</a> </p></figcaption>
+        </figure>
+    </section>
+
+    <section id="where">
+        <h2>Where</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4049.873115266292!2d-83.08946641932782!3d35.561967843424405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8859654875b3c999%3A0x8d30cc481a511803!2sCataloochee%20Ski%20Area!5e1!3m2!1sen!2sus!4v1773345596250!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <figure>
+            <img src="/images/cataloochee.jpeg" alt="A nice sunset at Cataloochee Ski Area with mountains in the background">
+        </figure>
+        <p>As mentioned previously, I do most of my snowboarding on the east coast. Since I live in Western NC, one of my favorite places to go is Cataloochee Ski Area.
+            This location offers a vast amount of runs for all skill levels, and usually doesn't get too crowded. 
+        </p>
+    </section>
+
+    <section id="how">
+        <h2>How</h2>
+            <p>Getting into snowboarding is pretty easy, but it can be a little intimidating at first. One of the best ways to get started is to find a local ski resort that offers snowboard rentals and lessons. However,
+                this approach can be expensive, which can be a barrier, especially if you're not sure if snowboarding is something you want to commit to yet. 
+                Furtheromre, while it is convienient to rent gear, most of the time, rental snowboarding gear is not well maintained, which can make it feel more challenging than it should. A more effective option is to find a used board and pair of boots. 
+                This will allow you to practice on your own time, and allow you to get used to the feel of your specific gear. Once you have your own gear, the next step is to find somewhere to use it. I recommend finding somehwere that offers discounts, 
+                which can be super helpful, especially if you're a student.  
+            </p>
+        <ul>
+            <li><input type="checkbox"> Find a board</li>
+            <li><input type="checkbox"> Find some boots</li>
+            <li><input type="checkbox"> Find a slope</li>
+            <li><input type="checkbox"> Strap in and go!</li>
+        </ul>
+        <figure>
+            <img src="/images/snowboardGear.jpg" alt="A man standing with snowboarding gear on.">
+            <figcaption><p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/32642690@N08/3564124599">D3 Snowboard Boots</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/32642690@N08">kikfoto</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-nd/2.0/?ref=openverse">CC BY-ND 2.0</a> </p></figcaption>
+        </figure>
+    </section>
+
+    <section id="why">
+        <h2>Why</h2>
+        <figure>
+            <img src="/images/snowboardGroupJump.jpg" alt="Four snowboarders mid-jump">
+            <figcaption><p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/44217191@N05/4939691102">Getting air off the Wu-Tang in the Men&#039;s Snowboard Boardercross Finals - The Brits, Laax 2010</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/44217191@N05">bobaliciouslondon</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0</a>.</p></figcaption>
+        </figure>
+        <p>Everyone has their own reasons for enjoying snowboarding. Snowboarding can serve as a nice way to connect with nature and stay active during cold winter months. 
+            For others, snowboarding offers a convienient way to get an adrenaline rush and have fun with friends. Regardless of your reasons, snowboarding is undoubtedly a fun and rewarding hobby that can be enjoyed by people of all ages and skill levels.
+            One of the most satisfying parts of snowboarding is just how good it feels to realize that your skill has improved. When you first start snowboarding, even just making it down a beginner slope without falling can feel like a huge accomplishment. As you progress, you'll find that you can take on more challenging terrain, and eventually start learning tricks. Each new skill you master can give you a great sense of achievement and keep you motivated to keep improving.
+        </p>
+        <figure>
+            <img src="/images/snowboardRailGrind.jpg" alt="A snowboarder grinding on a rail">
+            <figcaption><p class="attribution">"<a rel="noopener noreferrer" href="https://www.flickr.com/photos/46314851@N06/12797847085">Camp of Champions Snowboard Camp 171</a>" by <a rel="noopener noreferrer" href="https://www.flickr.com/photos/46314851@N06">Camp of Champions</a> is licensed under <a rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/2.0/?ref=openverse">CC BY 2.0 </a>.</p></figcaption>
+        </figure>
+    </section>
+
+    <section id="ai-prompts">
+        <h2>AI Prompts</h2>
+            <h3>General Webpage Outline</h3>
+            <p id="prompt">Can you make me webpage structured with six disctinct sections such that it
+... looks like each section is its own webpage. It should have sections called w
+... ho, what, when, where, how, why, and AI prompts. Each section should have an
+...  h2 heading. The header/nav should contain links to each section that allow
+... us to switch between sections quickly. The use of CSS/JS should make it so t
+... hat only the selected section is visible at a time (like a single-page app).
+... The 'what (home)' page should be the default visible page.
+- Gemma3:8b local</p>
+
+            <h3>Single-page Web App Development</h3>
+            <p>Can you modify this webpage such that each section takes up the entirety of the screen and appears as a single webpage? Can you also modify this webpage so that the nav links allow us to switch to different sections. -Claude Haiku 4.5 (VS-Code Copilot)</p>
+
+            <h3>Snowboard ASCII Animation</h3>
+            <p>Are you familliar with the famous c-donut program?<br>Do you think it would be possible to make a similar program that animates a custom ascii which I could embed in my website in a paragraph element? Claude Sonnet 4.6</p>
+
+            <h3>Snowboarder Cursor</h3>
+            <p>Do you think you can make a custom snowboard-themed cursor? Maybe a little guy on a snowboard, or just a snowboard itself. Claude Sonnet 4.6</p>
+
+            <h3>Summary</h3>
+            <p>Overall, I found AI models to be helpful in the foundational design of my webpage. I also found the use of AI to be helpful when it came to creating custom webpage elements, such as the snowboard ASCII animation, or the snowboarder cursor. </p>
+    </section>
+
+</body>
+
+</html>

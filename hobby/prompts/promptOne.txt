@@ -1,0 +1,8 @@
+Can you make me webpage structured with six disctinct sections such that it
+... looks like each section is its own webpage. It should have sections called w
+... ho, what, when, where, how, why, and AI prompts. Each section should have an
+...  h2 heading. The header/nav should contain links to each section that allow
+... us to switch between sections quickly. The use of CSS/JS should make it so t
+... hat only the selected section is visible at a time (like a single-page app).
+... The 'what (home)' page should be the default visible page.
+- Gemma3:8b local
