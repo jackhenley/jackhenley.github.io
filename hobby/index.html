@@ -101,19 +101,67 @@
         text-decoration: underline;
       }
 
+      #who figure:first-of-type {
+        float: left;
+        width: 30%;
+        margin: 0 1rem 1rem 0;
+      }
+
+      #who p {
+        float: left;
+        width: 35%;
+        margin: 0 1rem 1rem 0;
+      }
+
+      #who figure:last-of-type {
+        float: left;
+        width: 35%;
+        margin: 0;
+      }
+
       /**What**/
-      .what-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      #what .scene {
+        float: left;
+        width: 50%;
+        margin-right: 1rem;
+      }
+
+      #what pre#board {
+        min-width: 0;
+        width: 100%;
+      }
+
+      #what figure {
+        float: right;
+        width: 45%;
+        margin: 0;
+      }
+
+      #what figure img {
+        width: 100%;
+        max-width: none;
+      }
+
+      #what figure figcaption {
+        width: 100%;
+        text-align: center;
+        font-style: italic;
+        margin-top: 8px;
+      }
+
+      #what figure figcaption a {
+        color: var(--sand-dune);
+        text-decoration: underline;
+      }
+
+      #what p {
+        clear: both;
       }
 
       #what a {
         color: var(--sand-dune);
         text-decoration: underline;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: inline;
       }
 
       /**Snowboard-related CSS**/
@@ -398,6 +446,33 @@
         special about snowboarding, is that it's fun no matter what stage of
         learning you're at!
       </p>
+
+      <figure>
+        <img
+          src="images/snowboardersOnLift.jpg"
+          alt="Snowboarders on a lift together"
+        />
+        <figcaption>
+          <p class="attribution">
+            "<a
+              rel="noopener noreferrer"
+              href="https://www.flickr.com/photos/75718896@N00/73358704"
+              >Snowboarders At Timberline</a
+            >" by
+            <a
+              rel="noopener noreferrer"
+              href="https://www.flickr.com/photos/75718896@N00"
+              >frozenchipmunk</a
+            >
+            is licensed under
+            <a
+              rel="noopener noreferrer"
+              href="https://creativecommons.org/licenses/by/2.0/?ref=openverse"
+              >CC BY 2.0</a
+            >
+          </p>
+        </figcaption>
+      </figure>
     </section>
 
     <section id="what">
@@ -651,6 +726,32 @@
         frame();
       </script>
 
+      <figure>
+        <img
+          src="images/snowboardingSunnyDay.jpg"
+          alt="Snowboarding on a sunny day"
+        />
+        <figcaption>
+          <p class="attribution">
+            "<a
+              rel="noopener noreferrer"
+              href="https://www.flickr.com/photos/79105258@N00/337014991"
+              >Snowboarding</a
+            >" by
+            <a
+              rel="noopener noreferrer"
+              href="https://www.flickr.com/photos/79105258@N00"
+              >_ambrown</a
+            >
+            is licensed under
+            <a
+              rel="noopener noreferrer"
+              href="https://creativecommons.org/licenses/by-nc/2.0/?ref=openverse"
+              >CC BY-NC 2.0</a
+            >.
+          </p>
+        </figcaption>
+      </figure>
       <p id="what-text">
         Snowboarding is a hobby that takes advantage of snowfall in mountainous
         areas. While people who snowboard are constantly innovating new ways to
