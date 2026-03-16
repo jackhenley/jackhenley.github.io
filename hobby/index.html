@@ -44,12 +44,7 @@
         background-color: var(--charcoal);
       }
 
-      .section-link.active {
-        background-color: var(--charcoal);
-      }
-
       section {
-        padding: 20px;
         height: 100vh;
         display: none;
         background-color: var(--lavender-grey);
@@ -76,6 +71,9 @@
       /**Section specific Styling**/
 
       /**Who**/
+      #who {
+        padding: 20px;
+      }
       #who figure {
         float: left;
         width: 50%;
@@ -120,13 +118,16 @@
       }
 
       /**What**/
+      #what {
+        padding: 20px;
+      }
       #what .scene {
         float: left;
         width: 50%;
         margin-right: 1rem;
       }
 
-      #what pre#board {
+      #what #board {
         min-width: 0;
         width: 100%;
       }
@@ -178,7 +179,7 @@
         pointer-events: none;
       }
 
-      pre#board {
+      #board {
         font-family: "bebas neue", monospace;
         font-size: 11px;
         line-height: 1.15;
@@ -193,6 +194,9 @@
       }
 
       /**When**/
+      #when {
+        padding: 20px;
+      }
       #when p {
         clear: both;
         text-align: left;
@@ -238,6 +242,9 @@
       }
 
       /**Where**/
+      #where {
+        padding: 20px;
+      }
       #where iframe {
         float: left;
         width: 40%;
@@ -260,6 +267,9 @@
       }
 
       /**How**/
+      #how {
+        padding: 20px;
+      }
 
       #how uL {
         list-style: square;
@@ -293,6 +303,9 @@
       }
 
       /**Why**/
+      #why {
+        padding: 20px;
+      }
       #why figure {
         margin: 1.5rem auto;
         text-align: center;
@@ -311,16 +324,13 @@
 
       /**AI Prompts**/
 
-      #ai-prompts h3 {
+      h3 {
         text-decoration: underline;
       }
 
-      #when h3 {
-        margin: 0 0 1rem 0;
-        font-size: 1.2rem;
-        color: var(--sand-dune);
+      #ai-prompts {
+        padding: 20px;
       }
-
       #ai-prompts p {
         margin-bottom: 1.5rem;
       }
@@ -347,7 +357,7 @@
         function activateSection(id) {
           const targetSection = document.getElementById(id);
           const targetLink = document.querySelector(
-            `.section-link[href="#${id}"]`,
+            `.section-link[href="#${id}"]`
           );
           if (!targetSection || !targetLink) return false;
 
@@ -548,16 +558,16 @@
                 absU < 0.75;
 
               // Top face normal: mostly (0,1,0) but tilted at curved ends
-              let ny_top = 1,
-                nz_top = 0;
+              let nYTop = 1,
+                nZTop = 0;
               if (absU > CURVE_START) {
                 const t = (absU - CURVE_START) / (1.0 - CURVE_START);
                 const angle = Math.atan2(
                   2 * CURVE * t,
-                  HALF_L * (1 - CURVE_START),
+                  HALF_L * (1 - CURVE_START)
                 );
-                ny_top = Math.cos(angle);
-                nz_top = 0; // normal tangent is in XY plane
+                nYTop = Math.cos(angle);
+                nZTop = 0; // normal tangent is in XY plane
                 // Actually the curve is in XY so the normal rotates in XY
               }
 
@@ -570,7 +580,7 @@
                 ny: 1,
                 nz: 0,
                 stripe: isStripe,
-                face: "top",
+                face: "top"
               });
               // Bottom face
               verts.push({
@@ -581,7 +591,7 @@
                 ny: -1,
                 nz: 0,
                 stripe: false,
-                face: "bot",
+                face: "bot"
               });
             }
           }
@@ -612,7 +622,7 @@
               ny: 0,
               nz: -1,
               stripe: false,
-              face: "edge",
+              face: "edge"
             });
             // Right edge
             verts.push({
@@ -623,7 +633,7 @@
               ny: 0,
               nz: 1,
               stripe: false,
-              face: "edge",
+              face: "edge"
             });
           }
 
