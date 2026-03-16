@@ -194,31 +194,47 @@
 
       /**When**/
       #when p {
-        float: right;
-        text-align: right;
-        padding: 1.5rem;
-        margin: auto;
+        clear: both;
+        text-align: left;
+        padding: 1.5rem 0;
+        margin: 0;
       }
 
       #when figure {
+        float: left;
+        width: 45%;
         text-align: left;
+        margin-right: 1rem;
       }
 
       #when figure img {
-        width: 50%;
+        width: 100%;
         max-width: none;
       }
 
       #when figure figcaption p {
-        float: left;
-        padding: 1rem;
-        margin: auto;
+        padding: 1rem 0;
+        margin: 0;
       }
 
       #when figure figcaption a {
         font-style: italic;
         text-decoration: underline;
         color: var(--sand-dune);
+      }
+
+      #when iframe {
+        float: right;
+        width: 50%;
+        height: 700px;
+        border: none;
+        border-radius: 8px;
+      }
+
+      #when div a {
+        color: var(--sand-dune);
+        text-decoration: underline;
+        float: right;
       }
 
       /**Where**/
@@ -236,7 +252,7 @@
       #where figure img {
         max-width: 70%;
         max-height: auto;
-        border-radius: 15%;
+        border-radius: 1%;
       }
 
       #where p {
@@ -297,6 +313,12 @@
 
       #ai-prompts h3 {
         text-decoration: underline;
+      }
+
+      #when h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.2rem;
+        color: var(--sand-dune);
       }
 
       #ai-prompts p {
@@ -405,54 +427,13 @@
     <section id="who">
       <h2>Who</h2>
       <figure>
-        <a
-          href="https://www.flickr.com/photos/93969271@N03/12504147823"
-          target="_blank"
-          rel="author"
-        >
-          <img src="images/snowboarderInAction.jpg" alt="Snowboarder mid-air" />
-        </a>
-        <figcaption
-          style="text-align: center; font-style: italic; margin-top: 8px"
-        >
-          <p class="attribution">
-            "<a
-              rel="noopener noreferrer"
-              href="https://www.flickr.com/photos/93969271@N03/12504147823"
-              >Snowboarding</a
-            >" by
-            <a
-              rel="noopener noreferrer"
-              href="https://www.flickr.com/photos/93969271@N03"
-              >MarLeah Joy</a
-            >
-            is licensed under
-            <a
-              rel="noopener noreferrer"
-              href="https://creativecommons.org/licenses/by/2.0/?ref=openverse"
-              >CC BY 2.0
-            </a>
-          </p>
-        </figcaption>
-      </figure>
-      <p id="my-paragraph">
-        My name is Jack Henley and something I really enjoy doing when it's cold
-        out is snowboarding. Snowboarding is an awesome hobby, because anyone
-        can do it. Although it may be intimidating for beginners who've only
-        seen professionals doing crazy tricks, it's actually a very approachable
-        hobby to anybody interested. I personally grew up in Louisiana, and
-        therefore was not able to get into snowboarding until I moved to Western
-        North Caronlina about four years ago. However, something that I find
-        special about snowboarding, is that it's fun no matter what stage of
-        learning you're at!
-      </p>
-
-      <figure>
         <img
           src="images/snowboardersOnLift.jpg"
           alt="Snowboarders on a lift together"
         />
-        <figcaption>
+        <figcaption
+          style="text-align: center; font-style: italic; margin-top: 8px"
+        >
           <p class="attribution">
             "<a
               rel="noopener noreferrer"
@@ -470,6 +451,47 @@
               href="https://creativecommons.org/licenses/by/2.0/?ref=openverse"
               >CC BY 2.0</a
             >
+          </p>
+        </figcaption>
+      </figure>
+      <p id="my-paragraph">
+        My name is Jack Henley and something I really enjoy doing when it's cold
+        out is snowboarding. Snowboarding is an awesome hobby, because anyone
+        can do it. Although it may be intimidating for beginners who've only
+        seen professionals doing crazy tricks, it's actually a very approachable
+        hobby to anybody interested. I personally grew up in Louisiana, and
+        therefore was not able to get into snowboarding until I moved to Western
+        North Caronlina about four years ago. However, something that I find
+        special about snowboarding, is that it's fun no matter what stage of
+        learning you're at!
+      </p>
+
+      <figure>
+        <a
+          href="https://www.flickr.com/photos/93969271@N03/12504147823"
+          target="_blank"
+          rel="author"
+        >
+          <img src="images/snowboarderInAction.jpg" alt="Snowboarder mid-air" />
+        </a>
+        <figcaption>
+          <p class="attribution">
+            "<a
+              rel="noopener noreferrer"
+              href="https://www.flickr.com/photos/93969271@N03/12504147823"
+              >Snowboarding</a
+            >" by
+            <a
+              rel="noopener noreferrer"
+              href="https://www.flickr.com/photos/93969271@N03"
+              >MarLeah Joy</a
+            >
+            is licensed under
+            <a
+              rel="noopener noreferrer"
+              href="https://creativecommons.org/licenses/by/2.0/?ref=openverse"
+              >CC BY 2.0
+            </a>
           </p>
         </figcaption>
       </figure>
@@ -770,18 +792,6 @@
 
     <section id="when">
       <h2>When</h2>
-      <p>
-        Snowboarding is obviously best enjoyed in the winter, assuming you're in
-        North America. However, beyond that, there are actually some times of
-        the winter that are better than others for snowboarding. In my opinion,
-        the most ideal time to snowboard on the east coast is late January to
-        early Febuary. This is because any snow that's fallen has had time to
-        layer on top of previous snowfalls, which makes it much more pleasant to
-        snowboard on. While it can be nice to go even later in the season, once
-        it starts warming up, it's much more common to find ice on the
-        mountainside, which can lead to pretty gnarly wipeouts if you're not
-        expecting it.
-      </p>
       <figure>
         <a href="https://www.flickr.com/photos/29468339@N02/6710161193">
           <img src="images/winter.jpg" alt="Snowy mountain with ski lifts" />
@@ -807,6 +817,35 @@
           </p>
         </figcaption>
       </figure>
+
+      <iframe
+        src="https://www.meteoblue.com/en/weather/maps/widget/?windAnimation=0&gust=0&satellite=0&cloudsAndPrecipitation=1&temperature=1&sunshine=0&extremeForecastIndex=1&geoloc=detect&tempunit=F&lengthunit=imperial&windunit=mph&zoom=8&autowidth=auto&user_key=993029451adfa1a4&embed_key=a19ffb6b1bf5f6ef&sig=9c232a5182a9813e68c0c989270be8e1a318fb592ec10c341d6c05a86909ea6b"
+        frameborder="0"
+        scrolling="NO"
+        allowtransparency="true"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
+      <div>
+        <!-- DO NOT REMOVE THIS LINK --><a
+          href="https://www.meteoblue.com/en/weather/week/index"
+          target="_blank"
+          rel="noopener"
+          >meteoblue</a
+        >
+      </div>
+
+      <p>
+        Snowboarding is obviously best enjoyed in the winter, assuming you're in
+        North America. However, beyond that, there are actually some times of
+        the winter that are better than others for snowboarding. In my opinion,
+        the most ideal time to snowboard on the east coast is late January to
+        early Febuary. This is because any snow that's fallen has had time to
+        layer on top of previous snowfalls, which makes it much more pleasant to
+        snowboard on. While it can be nice to go even later in the season, once
+        it starts warming up, it's much more common to find ice on the
+        mountainside, which can lead to pretty gnarly wipeouts if you're not
+        expecting it.
+      </p>
     </section>
 
     <section id="where">
