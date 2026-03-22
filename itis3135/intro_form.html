@@ -8,6 +8,60 @@
     <script src="scripts/introduction.js" defer></script>
     <script src="scripts/generate_json.js" defer></script>
     <style>
+        :root {
+            --prussian-blue: #031d44ff;
+            --pale-slate: #cacfd6ff;
+            --chartreuse: #baff29ff;
+            --blue-slate: #4d6a6dff;
+            --dim-grey: #646E68ff;
+        }
+        body {
+            font-family: frutiger, sans-serif;
+            background-color: var(--dim-grey);
+            margin: 0;
+            padding: 20px;
+            color: var(--pale-slate);
+        }
+        fieldset {
+            border: 1px solid var(--prussian-blue);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: var(--blue-slate);
+            
+        }
+        fieldset input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--prussian-blue);
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: var(--prussian-blue);
+            color: var(--chartreuse)
+        }
+        fieldset textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--prussian-blue);
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: var(--prussian-blue);
+            color: var(--chartreuse)
+        }
+       div button {
+            background-color: var(--chartreuse);
+            color: var(--prussian-blue);
+            border: none;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        } 
+
+
         #preview-panel,
         #json-view {
             display: none;
@@ -18,6 +72,7 @@
             background-color: hsla(253, 51%, 39%, 1);
             padding: 1rem 0;
         }
+
         #preview-panel header a {
             color: hsla(108, 100%, 89%, 1);
             font-size: 18px;
@@ -27,20 +82,24 @@
             text-decoration: none;
             margin: 0 auto;
         }
+
         #preview-panel h1 {
             color: hsla(47, 100%, 50%, 1);
             font-family: archivo-black;
             max-width: fit-content;
             margin: auto;
         }
+
         #preview-panel h2 {
             color: hsla(275, 18%, 79%, 1);
             font-family: Frutiger, sans-serif;
         }
+
         #preview-panel h3 {
             color: hsla(275, 18%, 79%, 1);
             font-family: Frutiger, sans-serif;
         }
+
         #preview-panel p {
             font-family: Frutiger, sans-serif;
             color: hsla(108, 100%, 89%, 1);
@@ -48,6 +107,7 @@
             max-width: 800px;
             margin: 10px 20px 10px 20px;
         }
+
         #preview-panel ul {
             font-family: Frutiger, sans-serif;
             color: hsla(47, 100%, 50%, 1);
@@ -55,6 +115,7 @@
             max-width: 800px;
             margin: 10px 20px 10px 40px;
         }
+
         #preview-panel footer {
             padding: 10px 20px;
             margin-top: 20px;
@@ -65,6 +126,7 @@
             font-size: 18px;
             font-family: frutiger, sans-serif;
         }
+
         #preview-panel footer a {
             color: hsla(108, 100%, 89%, 1);
             font-size: 18px;
@@ -79,7 +141,8 @@
             padding: 1rem;
             font-family: monospace;
             font-size: 0.9rem;
-            background: #f4f4f4;
+            background: var(--prussian-blue);
+            color: var(--chartreuse);
             border: 1px solid #ccc;
             border-radius: 4px;
             white-space: pre;
@@ -91,159 +154,171 @@
 
 <body>
     <div id="form-view">
-    <h2>Intro Form</h2>
-    <h3>Please Submit the Form Below</h3>
-    <form id="form">
+        <h2>Intro Form</h2>
+        <h3>Please Submit the Form Below</h3>
+        <form id="form">
 
-        <fieldset>
-            <legend>Personal Information</legend>
+            <fieldset>
+                <legend>Personal Information</legend>
 
-            <label for="first-name">First Name (required):</label><br>
-            <input type="text" id="first-name" name="first-name" placeholder="Jack" value="Jack" required><br><br>
+                <label for="first-name">First Name (required):</label><br>
+                <input type="text" id="first-name" name="first-name" placeholder="Jack" value="Jack" required><br><br>
 
-            <label for="middle-name">Middle Name or Initial (optional):</label><br>
-            <input type="text" id="middle-name" name="middle-name" placeholder="B" value=""><br><br>
+                <label for="middle-name">Middle Name or Initial (optional):</label><br>
+                <input type="text" id="middle-name" name="middle-name" placeholder="B" value=""><br><br>
 
-            <label for="nickname">Nickname / Preferred Name (optional):</label><br>
-            <input type="text" id="nickname" name="nickname" placeholder="Jack" value=""><br><br>
+                <label for="nickname">Nickname / Preferred Name (optional):</label><br>
+                <input type="text" id="nickname" name="nickname" placeholder="Jack" value=""><br><br>
 
-            <label for="last-name">Last Name (required):</label><br>
-            <input type="text" id="last-name" name="last-name" placeholder="Henley" value="Henley" required><br><br>
-        </fieldset>
+                <label for="last-name">Last Name (required):</label><br>
+                <input type="text" id="last-name" name="last-name" placeholder="Henley" value="Henley" required><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>Mascot</legend>
+            <fieldset>
+                <legend>Mascot</legend>
 
-            <label for="mascot-adjective">Mascot Adjective (required):</label><br>
-            <input type="text" id="mascot-adjective" name="mascot-adjective" placeholder="Jolly" value="Jolly"
-                required><br><br>
+                <label for="mascot-adjective">Mascot Adjective (required):</label><br>
+                <input type="text" id="mascot-adjective" name="mascot-adjective" placeholder="Jolly" value="Jolly"
+                    required><br><br>
 
-            <label for="mascot-animal">Mascot Animal (required):</label><br>
-            <input type="text" id="mascot-animal" name="mascot-animal" placeholder="hawk" value="hawk" required><br><br>
+                <label for="mascot-animal">Mascot Animal (required):</label><br>
+                <input type="text" id="mascot-animal" name="mascot-animal" placeholder="hawk" value="hawk"
+                    required><br><br>
 
-            <label for="divider">Divider (required):</label><br>
-            <input type="text" id="divider" name="divider" placeholder="||" value="♣" required><br><br>
-        </fieldset>
+                <label for="divider">Divider (required):</label><br>
+                <input type="text" id="divider" name="divider" placeholder="||" value="♣" required><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>Photo</legend>
+            <fieldset>
+                <legend>Photo</legend>
 
-            <label for="picture">Picture (optional, defaults to introPhoto.jpg):</label><br>
-            <input type="file" id="picture" name="picture" accept="image/*"><br><br>
+                <label for="picture">Picture (optional, defaults to introPhoto.jpg):</label><br>
+                <input type="file" id="picture" name="picture" accept="image/*"><br><br>
 
-            <label for="picture-caption">Picture Caption (required):</label><br>
-            <textarea id="picture-caption" name="picture-caption" rows="4"
-                placeholder="one of my favorite camping memories"
-                required>One of my favorite camping memories</textarea><br><br>
-        </fieldset>
+                <label for="picture-caption">Picture Caption (required):</label><br>
+                <textarea id="picture-caption" name="picture-caption" rows="4"
+                    placeholder="one of my favorite camping memories"
+                    required>One of my favorite camping memories</textarea><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>About Me</legend>
+            <fieldset>
+                <legend>About Me</legend>
 
-            <label for="personal-statement">Personal Statement (required):</label><br>
-            <textarea id="personal-statement" name="personal-statement" rows="4" cols="50" placeholder="blah blah blah"
-                required>I'm a junior studying computer science with a concentration in AI, robotics, and gaming. I transferred from WCU for the fall semester and have so far been enjoying my time here at UNCC. I enjoy hiking, playing violin and mandolin, and playing video games in my free time.</textarea><br><br>
+                <label for="personal-statement">Personal Statement (required):</label><br>
+                <textarea id="personal-statement" name="personal-statement" rows="4" cols="50"
+                    placeholder="blah blah blah"
+                    required>I'm a junior studying computer science with a concentration in AI, robotics, and gaming. I transferred from WCU for the fall semester and have so far been enjoying my time here at UNCC. I enjoy hiking, playing violin and mandolin, and playing video games in my free time.</textarea><br><br>
 
-            <label for="personal-background">Personal Background (required):</label><br>
-            <textarea id="personal-background" name="personal-background" rows="4" cols="50"
-                placeholder="blah blah blah" required>I grew up in Louisiana and moved to Asheville, NC about four years ago. I'm pursuing a degree in computer science because I enjoy problem solving and the challenge of figuring things out.</textarea><br><br>
+                <label for="personal-background">Personal Background (required):</label><br>
+                <textarea id="personal-background" name="personal-background" rows="4" cols="50"
+                    placeholder="blah blah blah"
+                    required>I grew up in Louisiana and moved to Asheville, NC about four years ago. I'm pursuing a degree in computer science because I enjoy problem solving and the challenge of figuring things out.</textarea><br><br>
 
-            <label for="professional-background">Professional Background (required):</label><br>
-            <textarea id="professional-background" name="professional-background" rows="4" cols="50"
-                placeholder="e.g. internships, jobs, relevant experience" required>I have yet to work a role in the software industry, however I have taught coding classes for the company I work for.</textarea><br><br>
+                <label for="professional-background">Professional Background (required):</label><br>
+                <textarea id="professional-background" name="professional-background" rows="4" cols="50"
+                    placeholder="e.g. internships, jobs, relevant experience"
+                    required>I have yet to work a role in the software industry, however I have taught coding classes for the company I work for.</textarea><br><br>
 
-            <label for="academic-background">Academic Background (required):</label><br>
-            <textarea id="academic-background" name="academic-background" rows="4" cols="50"
-                placeholder="e.g. schools attended, major, year" required>I started pursuing computer science at WCU, and decided that UNCC would be a better fit for me.</textarea><br><br>
+                <label for="academic-background">Academic Background (required):</label><br>
+                <textarea id="academic-background" name="academic-background" rows="4" cols="50"
+                    placeholder="e.g. schools attended, major, year"
+                    required>I started pursuing computer science at WCU, and decided that UNCC would be a better fit for me.</textarea><br><br>
 
-            <label for="subject-background">Subject Background (optional):</label><br>
-            <textarea id="subject-background" name="subject-background" rows="4" cols="50"
-                placeholder="e.g. prior experience with web development"></textarea><br><br>
+                <label for="subject-background">Subject Background (optional):</label><br>
+                <textarea id="subject-background" name="subject-background" rows="4" cols="50"
+                    placeholder="e.g. prior experience with web development"></textarea><br><br>
 
-            <label for="primary-computer">Primary Computer (required):</label><br>
-            <textarea id="primary-computer" name="primary-computer" rows="4" cols="50"
-                placeholder="e.g. MacBook Pro M2, Windows desktop" required>I use an Asus G14 laptop as my "desktop" at home, and dual boot Windows 11 and EndeavourOS on it.</textarea><br><br>
-        </fieldset>
+                <label for="primary-computer">Primary Computer (required):</label><br>
+                <textarea id="primary-computer" name="primary-computer" rows="4" cols="50"
+                    placeholder="e.g. MacBook Pro M2, Windows desktop"
+                    required>I use an Asus G14 laptop as my "desktop" at home, and dual boot Windows 11 and EndeavourOS on it.</textarea><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>Course</legend>
+            <fieldset>
+                <legend>Course</legend>
 
-            <label>Course(s) (required):</label><br><br>
-            <div id="courses-container"></div>
-            <button type="button" id="add-course-btn">+ Add Course</button>
-        </fieldset>
+                <label>Course(s) (required):</label><br><br>
+                <div id="courses-container"></div>
+                <button type="button" id="add-course-btn">+ Add Course</button>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>Quote</legend>
+            <fieldset>
+                <legend>Quote</legend>
 
-            <label for="quote">Quote (required):</label><br>
-            <textarea id="quote" name="quote" rows="3" cols="50" required>It's the greatest gig in the world, being alive. You get to eat Denny's, wear a hat, whatever you want to do.</textarea><br><br>
+                <label for="quote">Quote (required):</label><br>
+                <textarea id="quote" name="quote" rows="3" cols="50"
+                    required>It's the greatest gig in the world, being alive. You get to eat Denny's, wear a hat, whatever you want to do.</textarea><br><br>
 
-            <label for="quote-author">Quote Author (required):</label><br>
-            <input type="text" id="quote-author" name="quote-author" value="Norm Macdonald" required><br><br>
-        </fieldset>
+                <label for="quote-author">Quote Author (required):</label><br>
+                <input type="text" id="quote-author" name="quote-author" value="Norm Macdonald" required><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>Fun Extras</legend>
+            <fieldset>
+                <legend>Fun Extras</legend>
 
-            <label for="funny-thing">Something Funny (optional):</label><br>
-            <textarea id="funny-thing" name="funny-thing" rows="3" cols="50"></textarea><br><br>
+                <label for="funny-thing">Something Funny (optional):</label><br>
+                <textarea id="funny-thing" name="funny-thing" rows="3" cols="50"></textarea><br><br>
 
-            <label for="share">Something I Would Like to Share (optional):</label><br>
-            <textarea id="share" name="share" rows="3" cols="50"></textarea><br><br>
-        </fieldset>
+                <label for="share">Something I Would Like to Share (optional):</label><br>
+                <textarea id="share" name="share" rows="3" cols="50"></textarea><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <fieldset>
-            <legend>Links</legend>
+            <fieldset>
+                <legend>Links</legend>
 
-            <label for="link-1-url">Link 1 URL (required):</label><br>
-            <input type="url" id="link-1-url" placeholder="https://..." value="https://www.linkedin.com/in/jack-henley-230565380" required>
-            <label for="link-1-name">Name:</label>
-            <input type="text" id="link-1-name" placeholder="LinkedIn" value="LinkedIn" required><br><br>
+                <label for="link-1-url">Link 1 URL (required):</label><br>
+                <input type="url" id="link-1-url" placeholder="https://..."
+                    value="https://www.linkedin.com/in/jack-henley-230565380" required>
+                <label for="link-1-name">Name:</label>
+                <input type="text" id="link-1-name" placeholder="LinkedIn" value="LinkedIn" required><br><br>
 
-            <label for="link-2-url">Link 2 URL (required):</label><br>
-            <input type="url" id="link-2-url" placeholder="https://..." value="https://github.com/jackhenley" required>
-            <label for="link-2-name">Name:</label>
-            <input type="text" id="link-2-name" placeholder="GitHub" value="GitHub" required><br><br>
+                <label for="link-2-url">Link 2 URL (required):</label><br>
+                <input type="url" id="link-2-url" placeholder="https://..." value="https://github.com/jackhenley"
+                    required>
+                <label for="link-2-name">Name:</label>
+                <input type="text" id="link-2-name" placeholder="GitHub" value="GitHub" required><br><br>
 
-            <label for="link-3-url">Link 3 URL (required):</label><br>
-            <input type="url" id="link-3-url" placeholder="https://..." value="https://webpages.charlotte.edu/jhenley8/" required>
-            <label for="link-3-name">Name:</label>
-            <input type="text" id="link-3-name" placeholder="Site name" value="CLT Web" required><br><br>
+                <label for="link-3-url">Link 3 URL (required):</label><br>
+                <input type="url" id="link-3-url" placeholder="https://..."
+                    value="https://webpages.charlotte.edu/jhenley8/" required>
+                <label for="link-3-name">Name:</label>
+                <input type="text" id="link-3-name" placeholder="Site name" value="CLT Web" required><br><br>
 
-            <label for="link-4-url">Link 4 URL (required):</label><br>
-            <input type="url" id="link-4-url" placeholder="https://..." value="https://jackhenley.github.io/" required>
-            <label for="link-4-name">Name:</label>
-            <input type="text" id="link-4-name" placeholder="Site name" value="Github.io" required><br><br>
+                <label for="link-4-url">Link 4 URL (required):</label><br>
+                <input type="url" id="link-4-url" placeholder="https://..." value="https://jackhenley.github.io/"
+                    required>
+                <label for="link-4-name">Name:</label>
+                <input type="text" id="link-4-name" placeholder="Site name" value="Github.io" required><br><br>
 
-            <label for="link-5-url">Link 5 URL (required):</label><br>
-            <input type="url" id="link-5-url" placeholder="https://..." value="https://jackhenley.github.io/itis3135/" required>
-            <label for="link-5-name">Name:</label>
-            <input type="text" id="link-5-name" placeholder="Site name" value="ITIS3135" required><br><br>
-        </fieldset>
+                <label for="link-5-url">Link 5 URL (required):</label><br>
+                <input type="url" id="link-5-url" placeholder="https://..."
+                    value="https://jackhenley.github.io/itis3135/" required>
+                <label for="link-5-name">Name:</label>
+                <input type="text" id="link-5-name" placeholder="Site name" value="ITIS3135" required><br><br>
+            </fieldset>
 
-        <br>
+            <br>
 
-        <button type="submit">Submit</button>
-        <button type="button" id="reset-btn">Reset</button>
-        <button type="button" id="clear">Clear</button>
-        <button type="button" id="generate-json-btn">Generate JSON</button>
+            <button type="submit">Submit</button>
+            <button type="button" id="reset-btn">Reset</button>
+            <button type="button" id="clear">Clear</button>
+            <button type="button" id="generate-json-btn">Generate JSON</button>
 
-    </form>
+        </form>
     </div><!-- /#form-view -->
     <div id="preview-panel"></div>
     <div id="json-view">
