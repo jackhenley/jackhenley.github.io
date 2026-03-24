@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Practice | Jack Henley</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #171717;
+        }
+
+        header {
+            background-color: #333;
+            color: rgb(9, 185, 0);
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+
+        header a {
+            color: rgb(9, 185, 0);
+            text-decoration: none;
+            margin-right: 15px;
+            float: left;
+        }
+
+        h1 {
+            color: rgb(9, 185, 0);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        section {
+            background-color: #333;
+            padding: 30px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #sentence-display {
+            font-family: 'Courier New', monospace;
+            font-size: 22px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background-color: #222;
+            border-radius: 4px;
+            word-break: break-word;
+        }
+
+        .char {
+            display: inline;
+        }
+
+        .char.pending {
+            color: #888;
+        }
+
+        .char.correct {
+            color: rgb(9, 185, 0);
+        }
+
+        .char.error {
+            color: #ff4444;
+            background-color: rgba(255, 68, 68, 0.2);
+            border-radius: 2px;
+        }
+
+        .char.cursor {
+            border-left: 2px solid rgb(9, 185, 0);
+        }
+
+        #input-area {
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            padding: 12px;
+            background-color: #222;
+            color: #eee;
+            border: 2px solid #555;
+            border-radius: 4px;
+            outline: none;
+            resize: none;
+            height: 52px;
+            overflow: hidden;
+        }
+
+        #input-area:focus {
+            border-color: rgb(9, 185, 0);
+        }
+
+        #input-area.has-error {
+            border-color: #ff4444;
+        }
+
+        #stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .stat-box {
+            background-color: #222;
+            border-radius: 4px;
+            padding: 12px 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            color: rgb(9, 185, 0);
+            font-size: 32px;
+            font-weight: bold;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        #progress-bar-container {
+            background-color: #222;
+            border-radius: 4px;
+            height: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: rgb(9, 185, 0);
+            transition: width 0.1s ease;
+        }
+
+        #progress-bar.has-error {
+            background-color: #ff4444;
+        }
+
+        #result-message {
+            color: rgba(134, 90, 181, 0.962);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20px;
+            margin-top: 16px;
+            min-height: 28px;
+            text-align: center;
+        }
+
+        #new-sentence-btn {
+            display: block;
+            margin: 16px auto 0;
+            padding: 10px 28px;
+            background-color: rgb(9, 185, 0);
+            color: #171717;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+
+        #new-sentence-btn:hover {
+            background-color: rgb(7, 150, 0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">Back</a>
+    </header>
+    <section>
+        <h1>Typing Practice</h1>
+
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div id="sentence-display"></div>
+
+        <textarea id="input-area" placeholder="Start typing to begin..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+
+        <div id="stats">
+            <div class="stat-box">
+                <div class="stat-label">WPM</div>
+                <div class="stat-value" id="wpm">--</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Time (s)</div>
+                <div class="stat-value" id="timer">0.0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Progress</div>
+                <div class="stat-value" id="progress-pct">0%</div>
+            </div>
+        </div>
+
+        <div id="result-message"></div>
+        <button id="new-sentence-btn">New Sentence</button>
+    </section>
+
+    <script>
+        const WORDS = [
+            "the","be","to","of","and","a","in","that","have","it","for","not","on","with","he","as","you","do","at","this",
+            "but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there","their","what",
+            "so","up","out","if","about","who","get","which","go","me","when","make","can","like","time","no","just","him","know",
+            "take","people","into","year","your","good","some","could","them","see","other","than","then","now","look","only","come",
+            "its","over","think","also","back","after","use","two","how","our","work","first","well","way","even","new","want",
+            "because","any","these","give","day","most","us","great","between","need","large","often","hand","high","place","hold",
+            "turn","here","why","ask","went","men","read","need","land","different","home","move","try","kind","hand","picture",
+            "again","change","off","play","spell","air","away","animal","house","point","page","letter","mother","answer","found",
+            "still","learn","should","world","thought","never","last","might","story","tree","cross","farm","hard","start","might",
+            "story","saw","far","sea","draw","left","late","run","don","while","press","close","night","real","life","few","open"
+        ];
+
+        const SENTENCE_WORD_COUNT = 20;
+
+        let sentence = "";
+        let startTime = null;
+        let timerInterval = null;
+        let finished = false;
+
+        function generateSentence() {
+            const words = [];
+            for (let i = 0; i < SENTENCE_WORD_COUNT; i++) {
+                words.push(WORDS[Math.floor(Math.random() * WORDS.length)]);
+            }
+            // Capitalize first word
+            words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+            return words.join(" ") + ".";
+        }
+
+        function renderSentence(typed) {
+            const display = document.getElementById("sentence-display");
+            let html = "";
+            for (let i = 0; i < sentence.length; i++) {
+                const ch = sentence[i];
+                let cls = "char pending";
+                if (i < typed.length) {
+                    cls = typed[i] === ch ? "char correct" : "char error";
+                } else if (i === typed.length) {
+                    cls = "char pending cursor";
+                }
+                const escaped = ch === " " ? "&nbsp;" : ch.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+                html += `<span class="${cls}">${escaped}</span>`;
+            }
+            display.innerHTML = html;
+        }
+
+        function updateProgress(typed) {
+            const bar = document.getElementById("progress-bar");
+            const pctEl = document.getElementById("progress-pct");
+            const hasError = hasTypo(typed);
+
+            // Progress is based on the furthest correctly-matched prefix
+            let correctLen = 0;
+            for (let i = 0; i < typed.length && i < sentence.length; i++) {
+                if (typed[i] === sentence[i]) correctLen = i + 1;
+                else break;
+            }
+            const pct = Math.round((correctLen / sentence.length) * 100);
+            bar.style.width = pct + "%";
+            pctEl.textContent = pct + "%";
+
+            bar.classList.toggle("has-error", hasError);
+        }
+
+        function hasTypo(typed) {
+            for (let i = 0; i < typed.length; i++) {
+                if (typed[i] !== sentence[i]) return true;
+            }
+            return false;
+        }
+
+        function updateWPM(elapsed) {
+            if (elapsed <= 0) return;
+            // Count correct words typed so far
+            let correctLen = 0;
+            const typed = document.getElementById("input-area").value;
+            for (let i = 0; i < typed.length && i < sentence.length; i++) {
+                if (typed[i] === sentence[i]) correctLen = i + 1;
+                else break;
+            }
+            const words = correctLen / 5;
+            const minutes = elapsed / 60;
+            const wpm = Math.round(words / minutes);
+            document.getElementById("wpm").textContent = wpm;
+        }
+
+        function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(() => {
+                const elapsed = (Date.now() - startTime) / 1000;
+                document.getElementById("timer").textContent = elapsed.toFixed(1);
+                updateWPM(elapsed);
+            }, 100);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+
+        function finishRound() {
+            finished = true;
+            stopTimer();
+            const elapsed = (Date.now() - startTime) / 1000;
+            const words = sentence.trim().split(/\s+/).length;
+            const wpm = Math.round((words / elapsed) * 60);
+            document.getElementById("wpm").textContent = wpm;
+            document.getElementById("timer").textContent = elapsed.toFixed(1);
+            document.getElementById("result-message").textContent =
+                `Finished! ${wpm} WPM in ${elapsed.toFixed(1)}s.`;
+            document.getElementById("input-area").disabled = true;
+        }
+
+        function resetRound() {
+            sentence = generateSentence();
+            finished = false;
+            startTime = null;
+            stopTimer();
+
+            document.getElementById("input-area").value = "";
+            document.getElementById("input-area").disabled = false;
+            document.getElementById("wpm").textContent = "--";
+            document.getElementById("timer").textContent = "0.0";
+            document.getElementById("progress-bar").style.width = "0%";
+            document.getElementById("progress-bar").classList.remove("has-error");
+            document.getElementById("progress-pct").textContent = "0%";
+            document.getElementById("result-message").textContent = "";
+            document.getElementById("input-area").classList.remove("has-error");
+
+            renderSentence("");
+            document.getElementById("input-area").focus();
+        }
+
+        document.getElementById("input-area").addEventListener("input", function () {
+            if (finished) return;
+
+            const typed = this.value;
+
+            if (typed.length === 1 && startTime === null) {
+                startTimer();
+            }
+
+            const typo = hasTypo(typed);
+            this.classList.toggle("has-error", typo);
+
+            renderSentence(typed);
+            updateProgress(typed);
+
+            // Check completion: typed matches sentence exactly
+            if (typed === sentence) {
+                finishRound();
+            }
+        });
+
+        // Prevent newlines
+        document.getElementById("input-area").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") e.preventDefault();
+        });
+
+        document.getElementById("new-sentence-btn").addEventListener("click", resetRound);
+
+        // Init
+        resetRound();
+    </script>
+</body>
+</html>
