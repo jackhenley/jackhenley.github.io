@@ -53,5 +53,5 @@ footer a {
   color: var(--pale-slate);
   font-size: 22px;
   text-decoration-color: var(--pale-slate);
-  text-decoration: wavy underline;
+  text-decoration: none;
 }

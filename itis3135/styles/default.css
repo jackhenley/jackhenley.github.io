@@ -63,5 +63,5 @@ footer a {
   color: hsla(108, 100%, 89%, 1);
   font-size: 18px;
   font-family: frutiger, sans-serif;
-  text-decoration: underline wavy;
+  text-decoration: none;
 }
