@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Overview</title>
-    <style src="styles/default.css"></style>
+    <title>Jack Henley | Project Overview</title>
+    <link href="styles/default.css" rel="stylesheet">
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-   <p>Page content coming soon</p> 
+    <div data-include="components/header.html"></div>
+    <br>
+    <main>
+        <h2>Requirements and Design Document</h2>
+        <h2>Procedure Insights</h2>
+        <h2>Jack Henley</h2>
+        <h2>4/5/2026</h2>
+
+
+        <h3>Project Name: Procedure Insights</h3>
+
+
+        <h3>Project Overview: </h3>
+        <p>This site will be designed for patients preparing to receive various radiology treatments. It is intended to
+            be useful both for patients seeking information at home, or for patients who are already in the hospital.
+            The site will display a variety of procedures, and there will be a page for each procedure. Each page will
+            contain an interactive slideshow of illustrations that patients can click through to see a step by step
+            representation of what the procedure will entail. Each page will also contain detailed instructions on how
+            to prepare in the days leading up to the procedure, as well as best practices for recovery in the days
+            following the procedure. </p>
+
+        <h3>Client Information</h3>
+        <p>My client is Travis Henley, and he works for ARA Health. This project will not be tied to ARA Health in any
+            way, and will be an independent source for information about procedures. His email is thenley@avlrad.com</p>
+
+        <h3>Site Map: </h3>
+        <figure>
+            <img src="images/project_overview_sitemap.png" alt="Sitemap of my project" width="800px" height="auto">
+            <figcaption>Note: This is a simplified representation of the site. The final site will likely feature over
+                twenty distinct procedures.</figcaption>
+        </figure>
+        <br />
+
+        <h3>Page Design</h3>
+        <section>
+            <h4>Home</h4>
+            <p>This page will be the landing page for users when they visit the site. This page allows them to choose
+                which sub-page they would like to navigate to, and also provides them with a brief description of the
+                purpose of the website, which will be a paragraph element. Users will be able to navigate to the ‘About
+                Us’ and ‘Support’ pages via a navigation bar in the footer of the page. They will be able to navigate to
+                the ‘Procedure Search’ page by clicking a button displayed in the center of the page.</p>
+        </section>
+        <section>
+            <h4>Support</h4>
+            <p>This page will allow users to get in contact if they have any extra questions. There will be a field that
+                will allow the user to submit a question, which will then send an email to my client. This will be
+                achieved through an API such as but not limited to <a
+                    href="https://formspree.io/library/feedback/docs-feedback-form/">Formspree</a></p>
+        </section>
+        <section>
+            <h4>About Us</h4>
+            <p>This page will give a more detailed overview of the website, as well as provide information about my
+                client and his work. </p>
+        </section>
+        <section>
+            <h4>Procedure Search</h4>
+            <p>This page will provide users with a searchbar that will allow them to view the page corresponding to
+                their procedure. It will feature a list view when searching which will allow the user to see all
+                procedures with similar names. I will create this searchbar myself using Javascript.</p>
+        </section>
+        <section>
+            <h4>Procedure X/h4</h4>
+                <p>Each procedure page will be structurally identical. They will feature an interactive slideshow,
+                    containing illustrations which will allow the user to view the procedure step by step. They will
+                    also feature two distinct paragraphs containing information about preparatory care, as well as
+                    recovery-related care. They will also have a link to the ‘Support’ page, which they can navigate to
+                    if they have further questions related to the procedure.</p>
+        </section>
+        <h3>Dynamic Functionalities</h3>
+        <p>The main functionalities that the site will contain are as follows:
+        <ul>
+            <li>Form which automatically emails contents when submitted (Page: Support | Implementation: external API <a
+                    href="Each procedure page will be structurally identical. They will feature an interactive slideshow, containing illustrations which will allow the user to view the procedure step by step. They will also feature two distinct paragraphs containing information about preparatory care, as well as recovery-related care. They will also have a link to the ‘Support’ page, which they can navigate to if they have further questions related to the procedure.">(example)</a>
+            </li>
+            <li>Search bar that allows users to navigate to relevant/related pages (Page: Procedure Serach |
+                Implementation: Javascript)</li>
+            <li>Interactive slideshow (Page: Procedure X | Implementation: Javascript)</li>
+        </ul>
+        </p>
+    </main>
+    <div data-include="components/footer.html"></div>
+    <script src="scripts/HTMLInclude.min.js"></script>
 </body>
+
 </html>
