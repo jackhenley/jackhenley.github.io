@@ -1,0 +1,186 @@
+/* ============================================================
+   Procedure Insights — default.css
+   Clean, professional medical-information site styles
+   ============================================================ */
+
+/* ----- Reset / Base ----- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f4f4f0;
+    color: #2e2e2e;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ----- Typography ----- */
+h1, h2, h3 {
+    color: #1f2e3a;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+p {
+    margin-bottom: 1rem;
+    max-width: 68ch;
+}
+
+a {
+    color: #2a6496;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #1a4568;
+}
+
+/* ----- Header / Nav ----- */
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #d8d8d2;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 56px;
+}
+
+nav a {
+    color: #3a3a3a;
+    font-size: 0.925rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #eaeae6;
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+/* ----- Main Content ----- */
+main {
+    flex: 1;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* ----- Buttons ----- */
+button,
+input[type="submit"] {
+    background-color: #2a6496;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    transition: background-color 0.15s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #1a4568;
+}
+
+/* ----- Forms (Support page) ----- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 520px;
+    margin-top: 1.5rem;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: #3a3a3a;
+}
+
+form input[type="email"],
+form textarea {
+    background-color: #ffffff;
+    border: 1px solid #c8c8c4;
+    border-radius: 5px;
+    color: #2e2e2e;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.55rem 0.75rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    width: 100%;
+}
+
+form input[type="email"]:focus,
+form textarea:focus {
+    border-color: #2a6496;
+    box-shadow: 0 0 0 3px rgba(42, 100, 150, 0.12);
+    outline: none;
+}
+
+form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* ----- Footer ----- */
+footer {
+    background-color: #ffffff;
+    border-top: 1px solid #d8d8d2;
+    color: #6b6b65;
+    font-size: 0.875rem;
+    padding: 1.25rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+footer p {
+    margin: 0;
+    max-width: none;
+}
+
+footer a {
+    color: #2a6496;
+    font-size: 0.875rem;
+}
