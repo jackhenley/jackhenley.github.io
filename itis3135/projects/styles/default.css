@@ -34,7 +34,7 @@ h1, h2, h3 {
     margin-bottom: 0.75rem;
 }
 
-h1 { font-size: 2rem; }
+h1 { font-size: 2rem; text-align: center; padding-top: 1.5rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.2rem; }
 
