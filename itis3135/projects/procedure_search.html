@@ -16,7 +16,16 @@
         </nav>
     </header>   
     <main>
-        <!--Search procedure searchbar will go here-->
+        <div id="procedure-search-wrapper">
+            <input
+                type="search"
+                id="procedure-search-input"
+                placeholder="Search procedures..."
+                autocomplete="off"
+                aria-label="Search procedures"
+            />
+            <ul id="procedure-search-results" style="display:none;"></ul>
+        </div>
     </main>
     <footer>
         <p>
@@ -25,5 +34,6 @@
         <a href="support.html">Ask a question</a>
     </footer>
 
+    <script src="scripts/procedure_search.js"></script>
 </body>
 </html>
