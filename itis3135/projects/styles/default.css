@@ -185,6 +185,153 @@ footer a {
     font-size: 0.875rem;
 }
 
+/* ----- Procedure Page Title ----- */
+main > h2 {
+    font-size: 1.75rem;
+    color: #1f2e3a;
+    padding-bottom: 0.6rem;
+    border-bottom: 3px solid #2a6496;
+    margin-bottom: 0;
+}
+
+/* ----- Accordion ----- */
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #d8d8d2;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f0f0ec;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.accordion-header h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #1f2e3a;
+    font-weight: 600;
+}
+
+.accordion-button {
+    background-color: transparent;
+    color: #2a6496;
+    border: 2px solid #2a6496;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    padding: 0;
+    font-size: 1.25rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.accordion-button:hover {
+    background-color: #2a6496;
+    color: #ffffff;
+}
+
+.accordion-content {
+    background-color: #ffffff;
+    border: 1px solid #d8d8d2;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+}
+
+.accordion-content p {
+    max-width: none;
+    margin-bottom: 0.5rem;
+    color: #3a3a3a;
+}
+
+.accordion-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.accordion-content li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: #3a3a3a;
+    line-height: 1.6;
+}
+
+.accordion-content li::before {
+    content: "•";
+    color: #2a6496;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05em;
+}
+
+/* ----- Procedure Tooltip ----- */
+#procedure-tooltip {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #d8d8d2;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    color: #3a3a3a;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 300px;
+    padding: 0.75rem 1rem;
+    pointer-events: none;
+    z-index: 200;
+}
+
+/* ----- All Procedures List ----- */
+#all-procedures-btn {
+    margin-top: 1.5rem;
+}
+
+#all-procedures-list {
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #d8d8d2;
+    border-radius: 8px;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0;
+    max-width: 720px;
+}
+
+#all-procedures-list li a {
+    display: block;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    color: #2e2e2e;
+    text-decoration: none;
+    transition: background-color 0.12s ease;
+}
+
+#all-procedures-list li a:hover {
+    background-color: #eaeae6;
+    color: #1a1a1a;
+}
+
 /* ----- Procedure Search ----- */
 #procedure-search-wrapper {
     width: 100%;

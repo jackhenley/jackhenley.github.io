@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Procedure Search | Procedure Insights</title>
     <link rel="stylesheet" href="styles/default.css">
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header>
         <nav>
@@ -14,20 +17,18 @@
             <a href="procedure_search.html">Procedure Search</a>
             <a href="support.html">Support</a>
         </nav>
-    </header>   
+    </header>
     <main>
         <h2>Procedure Search</h2>
         <p>Search for procedures by name (or description eventually)</p>
         <div id="procedure-search-wrapper">
-            <input
-                type="search"
-                id="procedure-search-input"
-                placeholder="Search procedures..."
-                autocomplete="off"
-                aria-label="Search procedures"
-            />
+            <input type="search" id="procedure-search-input" placeholder="Search procedures..." autocomplete="off"
+                aria-label="Search procedures" />
             <ul id="procedure-search-results" style="display:none;"></ul>
         </div>
+
+        <button id="all-procedures-btn">All Procedures</button>
+        <ul id="all-procedures-list" style="display:none;"></ul>
     </main>
     <footer>
         <p>
@@ -38,4 +39,5 @@
 
     <script src="scripts/procedure_search.js"></script>
 </body>
+
 </html>
