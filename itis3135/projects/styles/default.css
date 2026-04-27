@@ -93,7 +93,6 @@ nav a:hover {
 main {
     flex: 1;
     max-width: 900px;
-    width: 100%;
     margin: 0 auto;
     padding: 3rem 2rem;
 }
@@ -146,7 +145,6 @@ form textarea {
     font-size: 1rem;
     padding: 0.55rem 0.75rem;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    width: 100%;
 }
 
 form input[type="email"]:focus,
@@ -186,7 +184,7 @@ footer a {
 }
 
 /* ----- Procedure Page Title ----- */
-main > h2 {
+.procedure-title {
     font-size: 1.75rem;
     color: #1f2e3a;
     padding-bottom: 0.6rem;
@@ -219,7 +217,7 @@ main > h2 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.accordion-header h3 {
+.accordion-title {
     margin: 0;
     font-size: 1.05rem;
     color: #1f2e3a;
@@ -231,7 +229,6 @@ main > h2 {
     color: #2a6496;
     border: 2px solid #2a6496;
     border-radius: 50%;
-    width: 28px;
     height: 28px;
     min-width: 28px;
     padding: 0;
@@ -341,7 +338,7 @@ main > h2 {
 }
 
 #procedure-search-input {
-    width: 100%;
+    display: block;
     background-color: #ffffff;
     border: 1px solid #c8c8c4;
     border-radius: 5px;
@@ -372,7 +369,8 @@ main > h2 {
     margin: 0;
     padding: 0.25rem 0;
     position: absolute;
-    width: 100%;
+    left: 0;
+    right: 0;
     z-index: 10;
 }
 
