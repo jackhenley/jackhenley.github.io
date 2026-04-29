@@ -20,6 +20,7 @@ main {
   flex: 1;
 }
 
+
 h1 {
   color: hsla(47, 100%, 50%, 1);
   font-family: archivo-black;
@@ -103,4 +104,13 @@ footer a {
   font-size: 18px;
   font-family: frutiger, sans-serif;
   text-decoration: none;
+}
+
+#certification {
+  color: hsla(47, 100%, 50%, 1);
+  font-size: 18px;
+  font-family: frutiger, sans-serif;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
 }
