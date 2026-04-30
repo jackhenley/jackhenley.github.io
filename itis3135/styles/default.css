@@ -1,16 +1,15 @@
-/* CSS HSL from coolors.co*/
-/* --coffee-bean: rgb(71, 32, 2);
---thistle: hsla(275, 18%, 79%, 1);
---tea-green: hsla(108, 100%, 89%, 1);
---indigo-velvet: hsla(253, 51%, 39%, 1);
---school-bus-yellow: hsla(47, 100%, 50%, 1);
- */
+/* Color palette */
+/* --slate-charcoal:   #2d3142  — body background          */
+/* --charcoal-accent:  #3d4460  — header link background   */
+/* --pastel-blue:      #90c8e0  — h2/h3/h4 text            */
+/* --pastel-green:     #9ed9a0  — p, figcaption, links     */
+/* --pastel-peach:     #f0c8a0  — h1, ul, p links          */
 
 header a {
-  color: hsla(108, 100%, 89%, 1);
+  color: #9ed9a0;
   font-size: 18px;
   font-family: frutiger, sans-serif;
-  background-color: rgb(71, 32, 2);
+  background-color: #3d4460;
   padding: 5px 5px 5px 5px;
   text-decoration: none;
   max-width: 10px;
@@ -22,7 +21,7 @@ main {
 
 
 h1 {
-  color: hsla(47, 100%, 50%, 1);
+  color: #f0c8a0;
   font-family: archivo-black;
   max-width: fit-content;
   margin: auto;
@@ -31,26 +30,26 @@ h1 {
 body {
   min-height: 100vh; display: flex;
   flex-direction: column;
-  background-color: hsla(253, 51%, 39%, 1);
+  background-color: #2d3142;
   padding-bottom: 80px;
   padding-left: 20px;
 }
 
 h2, h3, h4 {
-  color: hsla(275, 18%, 79%, 1);
+  color: #90c8e0;
   font-family: Frutiger, sans-serif;
 }
 
 p {
   font-family: Frutiger, sans-serif;
-  color: hsla(108, 100%, 89%, 1);
+  color: #9ed9a0;
   font-size: 18px;
   max-width: 800px;
   margin: 10px 20px 10px 20px;
 }
 
 p a {
-  color: hsla(47, 100%, 50%, 1);
+  color: #f0c8a0;
   font-size: 18px;
   font-family: frutiger, sans-serif;
   text-decoration: none;
@@ -63,7 +62,7 @@ figure img {
 }
 figure figcaption {
   font-family: Frutiger, sans-serif;
-  color: hsla(108, 100%, 89%, 1);
+  color: #9ed9a0;
   font-size: 18px;
   max-width: 800px;
   margin: 10px 20px 10px 20px;
@@ -71,7 +70,7 @@ figure figcaption {
 
 ul {
   font-family: Frutiger, sans-serif;
-  color: hsla(47, 100%, 50%, 1);
+  color: #f0c8a0;
   font-size: 18px;
   max-width: 800px;
   margin: 10px 20px 10px 40px;
@@ -84,7 +83,7 @@ ul li {
 }
 
 ul li a {
-  color: hsla(108, 100%, 89%, 1);
+  color: #9ed9a0;
   font-size: 18px;
   font-family: frutiger, sans-serif;
   text-decoration: underline;
@@ -98,7 +97,7 @@ footer {
   right: 20px;
 }
 footer a {
-  color: hsla(108, 100%, 89%, 1);
+  color: #9ed9a0;
   padding-left: 5px;
   padding-right: 5px;
   font-size: 18px;
@@ -107,7 +106,7 @@ footer a {
 }
 
 #certification {
-  color: hsla(47, 100%, 50%, 1);
+  color: #f0c8a0;
   font-size: 18px;
   font-family: frutiger, sans-serif;
   text-align: center;

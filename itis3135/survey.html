@@ -17,11 +17,38 @@
     <!--Header-->
     <div data-include="components/header.html"></div>
     <main>
-      <h2>Survey</h2>
-      <p>
-        This page will contain the Survey page which I will make in the FCC RWD
-        Course.
-      </p>
+      <h1 id="title">User survey Test</h1>
+      <p id="description">This is a test survey website</p>
+
+      <form id="survey-form">
+        <label id="name-label">Enter name here</label>
+        <input id="name" type="text" required placeholder="john doe" />
+        <label id="email-label">Enter email here</label>
+        <input id="email" type="email" required placeholder="email@email.com" />
+        <label id="number-label">Enter a number here:</label>
+        <input
+          id="number"
+          type="number"
+          min="57"
+          max="888888888"
+          placeholder="69"
+        />
+
+        <select id="dropdown">
+          <option>This is option one</option>
+          <option>This is option two</option>
+        </select>
+
+        <input id="radio-yes" name="radio-btns" type="radio" value="yes" />
+        <input id="radio-no" name="radio-btns" type="radio" value="no" />
+
+        <br />
+        <input type="checkbox" value="12" />
+        <input type="checkbox" value="72" />
+        <input type="checkbox" value="108" />
+        <textarea name="user-comments">Enter comments here</textarea>
+        <input type="submit" id="submit" />
+      </form>
     </main>
     <!--Footer-->
     <div data-include="components/footer.html"></div>

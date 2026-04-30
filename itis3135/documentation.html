@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jack Henley | Documentation</title>
+    <!--default css-->
+    <link href="styles/default.css" rel="stylesheet" />
+    <!--Documentation project styles-->
+    <style>
+      .fcc-doc {
+        display: flex;
+        width: 100%;
+        min-height: 80vh;
+        box-sizing: border-box;
+      }
+
+      #navbar {
+        position: sticky;
+        top: 15vh;
+        align-self: flex-start;
+        flex-shrink: 0;
+        width: 260px;
+        max-height: 100vh;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        border-right: 3px solid #1a252f;
+      }
+
+      #navbar header {
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 20px 16px;
+        border-bottom: 1px solid #3d5166;
+        background-color: #1a252f;
+        color: #ecf0f1;
+        font-family: Arial, sans-serif;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 12px 16px;
+        color: #bdc3c7;
+        text-decoration: none;
+        border-bottom: 1px solid #3d5166;
+        transition: background-color 0.2s, color 0.2s;
+        background-color: transparent;
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+      }
+
+      .nav-link:hover {
+        background-color: #3d5166;
+        color: #fff;
+      }
+
+      #main-doc {
+        padding: 40px;
+        max-width: 900px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .main-section {
+        margin-bottom: 48px;
+      }
+
+      .main-section header {
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #2c3e50;
+        font-family: Arial, sans-serif;
+        background-color: transparent;
+      }
+
+      #main-doc p {
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        margin: 0 0 12px 0;
+        max-width: none;
+      }
+
+      #main-doc ul {
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        margin: 12px 0 12px 24px;
+        max-width: none;
+      }
+
+      #main-doc li {
+        margin-bottom: 6px;
+        padding-bottom: 0;
+        padding-top: 0;
+      }
+
+      .main-section code {
+        display: block;
+        background-color: #f4f4f4;
+        border-left: 4px solid #2c3e50;
+        padding: 12px 16px;
+        margin: 16px 0;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.9rem;
+        white-space: pre;
+        overflow-x: auto;
+        border-radius: 2px;
+        color: #333;
+      }
+
+      .main-section p code {
+        display: inline;
+        background-color: #eef;
+        border-left: none;
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: nowrap;
+        color: #333;
+      }
+
+      @media (max-width: 768px) {
+        .fcc-doc {
+          flex-direction: column;
+        }
+
+        #navbar {
+          position: relative;
+          width: 100%;
+          max-height: none;
+        }
+
+        #main-doc {
+          padding: 20px;
+        }
+      }
+    </style>
+    <!--Accumulus Script-->
+    <script
+      src="https://lint.page/kit/4d0fe3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!--Header-->
+    <div data-include="components/header.html"></div>
+    <main>
+      <div class="fcc-doc">
+        <nav id="navbar">
+          <header>JavaScript Documentation</header>
+          <a class="nav-link" href="#Introduction">Introduction</a>
+          <a class="nav-link" href="#Variables_and_Data_Types">Variables and Data Types</a>
+          <a class="nav-link" href="#Functions">Functions</a>
+          <a class="nav-link" href="#Control_Flow">Control Flow</a>
+          <a class="nav-link" href="#Arrays_and_Objects">Arrays and Objects</a>
+        </nav>
+
+        <main id="main-doc">
+          <section class="main-section" id="Introduction">
+            <header>Introduction</header>
+            <p>JavaScript is a lightweight, interpreted programming language with first-class functions.</p>
+            <p>It is most well-known as the scripting language for Web pages, but it is also used in many non-browser environments such as Node.js.</p>
+            <p>JavaScript is a prototype-based, multi-paradigm, single-threaded, dynamic language, supporting object-oriented, imperative, and declarative programming styles.</p>
+            <p>The standards for JavaScript are the ECMAScript Language Specification and the ECMAScript Internationalization API specification.</p>
+            <p>JavaScript should not be confused with the Java programming language &mdash; they are two separate languages with very different syntax, semantics, and use cases.</p>
+            <code>console.log("Hello, World!");</code>
+            <ul>
+              <li>Runs in the browser and on the server</li>
+              <li>Dynamically typed</li>
+              <li>Supports functional and object-oriented programming</li>
+            </ul>
+          </section>
+
+          <section class="main-section" id="Variables_and_Data_Types">
+            <header>Variables and Data Types</header>
+            <p>JavaScript has three ways to declare variables: <code>var</code>, <code>let</code>, and <code>const</code>.</p>
+            <p>The <code>let</code> keyword declares a block-scoped local variable, optionally initializing it to a value.</p>
+            <p>The <code>const</code> keyword declares a block-scoped, read-only named constant.</p>
+            <p>JavaScript data types include: Number, String, Boolean, null, undefined, Symbol, BigInt, and Object.</p>
+            <p>Variables declared with <code>var</code> are function-scoped and can be re-declared, which is why <code>let</code> and <code>const</code> are preferred in modern JavaScript.</p>
+            <code>let name = "Alice";
+const age = 30;
+var legacy = true;</code>
+            <ul>
+              <li>Use <code>const</code> by default</li>
+              <li>Use <code>let</code> when reassignment is needed</li>
+            </ul>
+          </section>
+
+          <section class="main-section" id="Functions">
+            <header>Functions</header>
+            <p>Functions are one of the fundamental building blocks in JavaScript. A function is a reusable block of code that performs a task or calculates a value.</p>
+            <p>You can define a function using a function declaration, function expression, or arrow function syntax.</p>
+            <p>Arrow functions provide a shorter syntax for writing functions and do not have their own <code>this</code> context.</p>
+            <p>Functions in JavaScript are first-class objects, meaning they can be assigned to variables, passed as arguments, and returned from other functions.</p>
+            <code>function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+const add = (a, b) => a + b;</code>
+            <ul>
+              <li>Arrow functions are concise and lexically bind <code>this</code></li>
+              <li>Default parameters allow functions to have fallback values</li>
+            </ul>
+          </section>
+
+          <section class="main-section" id="Control_Flow">
+            <header>Control Flow</header>
+            <p>Control flow is the order in which individual statements, instructions, or function calls are executed or evaluated.</p>
+            <p>JavaScript supports <code>if</code>, <code>else if</code>, and <code>else</code> statements to execute code based on conditions.</p>
+            <p>The <code>switch</code> statement evaluates an expression and matches it against several case clauses.</p>
+            <p>Loops such as <code>for</code>, <code>while</code>, and <code>do...while</code> allow code to be executed repeatedly.</p>
+            <p>The <code>for...of</code> loop iterates over iterable objects like arrays, and <code>for...in</code> iterates over the enumerable properties of an object.</p>
+            <code>for (let i = 0; i &lt; 5; i++) {
+  console.log(i);
+}</code>
+            <ul>
+              <li>Use <code>===</code> for strict equality checks</li>
+              <li>The ternary operator is a shorthand for simple if/else expressions</li>
+            </ul>
+          </section>
+
+          <section class="main-section" id="Arrays_and_Objects">
+            <header>Arrays and Objects</header>
+            <p>Arrays are ordered collections of values, while objects are unordered collections of key-value pairs.</p>
+            <p>Arrays have useful built-in methods such as <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>forEach</code>, and <code>find</code>.</p>
+            <p>Objects can be created using object literal syntax, constructor functions, or the <code>class</code> keyword introduced in ES6.</p>
+            <p>Destructuring allows you to unpack values from arrays or properties from objects into distinct variables.</p>
+            <p>The spread operator (<code>...</code>) allows an iterable to be expanded, and rest parameters collect multiple function arguments into an array.</p>
+            <code>const fruits = ["apple", "banana", "cherry"];
+const person = { name: "Bob", age: 25 };
+const { name, age } = person;</code>
+            <ul>
+              <li>Use <code>Array.isArray()</code> to check if a value is an array</li>
+              <li>Object methods like <code>Object.keys()</code> and <code>Object.values()</code> are handy for iteration</li>
+              <li>The spread operator simplifies copying and merging arrays and objects</li>
+            </ul>
+          </section>
+        </main>
+      </div>
+    </main>
+    <!--Footer-->
+    <div data-include="components/footer.html"></div>
+    <!--HTML Include Script-->
+    <script src="scripts/HTMLInclude.min.js"></script>
+  </body>
+</html>

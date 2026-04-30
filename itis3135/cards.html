@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jack Henley | Cards</title>
+    <!--default css-->
+    <link href="styles/default.css" rel="stylesheet" />
+    <!--Cards project styles-->
+    <style>
+      #playing-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        width: 80%;
+        margin: 20px auto;
+      }
+
+      .card {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 150px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        color: #000;
+      }
+
+      .left {
+        flex-grow: 1;
+        align-self: flex-start;
+      }
+
+      .middle {
+        flex-grow: 1;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .right {
+        flex-grow: 1;
+        align-self: flex-end;
+      }
+    </style>
+    <!--Accumulus Script-->
+    <script
+      src="https://lint.page/kit/4d0fe3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!--Header-->
+    <div data-include="components/header.html"></div>
+    <main>
+      <div id="playing-cards">
+        <div class="card">
+          <div class="left">&#9824;</div>
+          <div class="middle">
+            <img src="https://via.placeholder.com/50" alt="Card Image" />
+            <p>King</p>
+          </div>
+          <div class="right">&#9827;</div>
+        </div>
+
+        <div class="card">
+          <div class="left">&#9829;</div>
+          <div class="middle">
+            <img src="https://via.placeholder.com/50" alt="Card Image" />
+            <p>Queen</p>
+          </div>
+          <div class="right">&#9830;</div>
+        </div>
+
+        <div class="card">
+          <div class="left">&#9830;</div>
+          <div class="middle">
+            <img src="https://via.placeholder.com/50" alt="Card Image" />
+            <p>Jack</p>
+          </div>
+          <div class="right">&#9824;</div>
+        </div>
+
+        <div class="card">
+          <div class="left">&#9827;</div>
+          <div class="middle">
+            <img src="https://via.placeholder.com/50" alt="Card Image" />
+            <p>10</p>
+          </div>
+          <div class="right">&#9829;</div>
+        </div>
+      </div>
+    </main>
+    <!--Footer-->
+    <div data-include="components/footer.html"></div>
+    <!--HTML Include Script-->
+    <script src="scripts/HTMLInclude.min.js"></script>
+  </body>
+</html>
