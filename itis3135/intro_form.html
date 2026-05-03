@@ -7,6 +7,7 @@
     <title>Intro Form</title>
     <script src="scripts/introduction.js" defer></script>
     <script src="scripts/generate_json.js" defer></script>
+    <script src="scripts/generate_html.js" defer></script>
     <style>
         :root {
             --prussian-blue: #031d44ff;
@@ -62,7 +63,8 @@
         } 
 
         #preview-panel,
-        #json-view {
+        #json-view,
+        #html-view {
             display: none;
         }
 
@@ -133,7 +135,8 @@
             text-decoration: underline wavy;
         }
 
-        #json-output {
+        #json-output,
+        #html-output {
             display: block;
             width: 100%;
             box-sizing: border-box;
@@ -196,7 +199,7 @@
                 <legend>Photo</legend>
 
                 <label for="picture">Picture (optional, defaults to introPhoto.jpg):</label><br>
-                <input id="file-input" type="file" id="picture" name="picture" accept="image/*"><br><br>
+                <input type="file" id="picture" name="picture" accept="image/*"><br><br>
 
                 <label for="picture-caption">Picture Caption (required):</label><br>
                 <textarea id="picture-caption" name="picture-caption" rows="4"
@@ -316,6 +319,7 @@
             <button type="button" id="reset-btn">Reset</button>
             <button type="button" id="clear">Clear</button>
             <button type="button" id="generate-json-btn">Generate JSON</button>
+            <button type="button" id="generate-html-btn">Generate HTML</button>
 
         </form>
     </div><!-- /#form-view -->
@@ -326,6 +330,13 @@
         <button type="button" id="back-from-json-btn">Back to Form</button>
         <br><br>
         <textarea id="json-output" readonly></textarea>
+    </div>
+    <div id="html-view">
+        <h2>Generated HTML</h2>
+        <button type="button" id="copy-html-btn">Copy to Clipboard</button>
+        <button type="button" id="back-from-html-btn">Back to Form</button>
+        <br><br>
+        <textarea id="html-output" readonly></textarea>
     </div>
 
 </body>
