@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jack Henley | Survey</title>
+    <title>Jack Henley | Hawk Watcher Survey</title>
     <!--default css-->
     <link href="styles/default.css" rel="stylesheet" />
     <!--Accumulus Script-->
@@ -17,15 +17,15 @@
     <!--Header-->
     <div data-include="components/header.html"></div>
     <main>
-      <h1 id="title">User survey Test</h1>
-      <p id="description">This is a test survey website</p>
+      <h1 id="title">Hawk Watcher Survey</h1>
+      <p id="description">Help us learn about local hawk sightings in your area</p>
 
       <form id="survey-form">
-        <label id="name-label">Enter name here</label>
-        <input id="name" type="text" required placeholder="john doe" />
-        <label id="email-label">Enter email here</label>
-        <input id="email" type="email" required placeholder="email@email.com" />
-        <label id="number-label">Enter a number here:</label>
+        <label id="name-label">Enter your name here</label>
+        <input id="name" type="text" required placeholder="jane birder" />
+        <label id="email-label">Enter your email here</label>
+        <input id="email" type="email" required placeholder="watcher@email.com" />
+        <label id="number-label">How many hawks have you spotted this year?</label>
         <input
           id="number"
           type="number"
@@ -35,8 +35,8 @@
         />
 
         <select id="dropdown">
-          <option>This is option one</option>
-          <option>This is option two</option>
+          <option>Red-tailed Hawk</option>
+          <option>Cooper's Hawk</option>
         </select>
 
         <input id="radio-yes" name="radio-btns" type="radio" value="yes" />
@@ -46,7 +46,7 @@
         <input type="checkbox" value="12" />
         <input type="checkbox" value="72" />
         <input type="checkbox" value="108" />
-        <textarea name="user-comments">Enter comments here</textarea>
+        <textarea name="user-comments">Describe your favorite hawk sighting</textarea>
         <input type="submit" id="submit" />
       </form>
     </main>

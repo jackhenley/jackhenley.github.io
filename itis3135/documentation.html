@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jack Henley | Documentation</title>
+    <title>Jack Henley | Hawk Field Guide</title>
     <!--default css-->
     <link href="styles/default.css" rel="stylesheet" />
     <!--Documentation project styles-->
@@ -153,96 +153,97 @@
     <main>
       <div class="fcc-doc">
         <nav id="navbar">
-          <header>JavaScript Documentation</header>
+          <header>Hawk Field Guide</header>
           <a class="nav-link" href="#Introduction">Introduction</a>
-          <a class="nav-link" href="#Variables_and_Data_Types">Variables and Data Types</a>
-          <a class="nav-link" href="#Functions">Functions</a>
-          <a class="nav-link" href="#Control_Flow">Control Flow</a>
-          <a class="nav-link" href="#Arrays_and_Objects">Arrays and Objects</a>
+          <a class="nav-link" href="#Variables_and_Data_Types">Anatomy and Plumage</a>
+          <a class="nav-link" href="#Functions">Hunting Behavior</a>
+          <a class="nav-link" href="#Control_Flow">Habitat and Migration</a>
+          <a class="nav-link" href="#Arrays_and_Objects">Identification Tips</a>
         </nav>
 
-        <main id="main-doc">
+        <div id="main-doc">
           <section class="main-section" id="Introduction">
             <header>Introduction</header>
-            <p>JavaScript is a lightweight, interpreted programming language with first-class functions.</p>
-            <p>It is most well-known as the scripting language for Web pages, but it is also used in many non-browser environments such as Node.js.</p>
-            <p>JavaScript is a prototype-based, multi-paradigm, single-threaded, dynamic language, supporting object-oriented, imperative, and declarative programming styles.</p>
-            <p>The standards for JavaScript are the ECMAScript Language Specification and the ECMAScript Internationalization API specification.</p>
-            <p>JavaScript should not be confused with the Java programming language &mdash; they are two separate languages with very different syntax, semantics, and use cases.</p>
-            <code>console.log("Hello, World!");</code>
+            <p>Hawks are birds of prey belonging to the family Accipitridae, known for their sharp talons, hooked beaks, and exceptional eyesight.</p>
+            <p>They are most commonly seen soaring above open fields or perched on tall trees and utility poles, scanning for prey below.</p>
+            <p>Hawks are diurnal hunters, meaning they are active during the day, and they play a critical role as top predators in their ecosystems.</p>
+            <p>The term "hawk" loosely covers two main groups: the buteos (broad-winged soaring hawks) and the accipiters (forest-dwelling hunters with shorter wings and longer tails).</p>
+            <p>Hawks should not be confused with falcons &mdash; falcons belong to a separate family (Falconidae) and have notched beaks and pointed wings adapted for high-speed dives.</p>
+            <code>Family: Accipitridae
+Order: Accipitriformes</code>
             <ul>
-              <li>Runs in the browser and on the server</li>
-              <li>Dynamically typed</li>
-              <li>Supports functional and object-oriented programming</li>
+              <li>Found on every continent except Antarctica</li>
+              <li>Eyesight estimated at 8 times sharper than a human's</li>
+              <li>Includes both soaring buteos and agile accipiters</li>
             </ul>
           </section>
 
           <section class="main-section" id="Variables_and_Data_Types">
-            <header>Variables and Data Types</header>
-            <p>JavaScript has three ways to declare variables: <code>var</code>, <code>let</code>, and <code>const</code>.</p>
-            <p>The <code>let</code> keyword declares a block-scoped local variable, optionally initializing it to a value.</p>
-            <p>The <code>const</code> keyword declares a block-scoped, read-only named constant.</p>
-            <p>JavaScript data types include: Number, String, Boolean, null, undefined, Symbol, BigInt, and Object.</p>
-            <p>Variables declared with <code>var</code> are function-scoped and can be re-declared, which is why <code>let</code> and <code>const</code> are preferred in modern JavaScript.</p>
-            <code>let name = "Alice";
-const age = 30;
-var legacy = true;</code>
+            <header>Anatomy and Plumage</header>
+            <p>A hawk's body is built for hunting: aerodynamic feathers, powerful talons, and a hooked beak designed to tear flesh.</p>
+            <p>The <code>tail</code> is used for steering during flight and for braking when descending toward prey.</p>
+            <p>The <code>wingspan</code> varies widely &mdash; from about 17 inches in a Sharp-shinned Hawk to over 4 feet in a Ferruginous Hawk.</p>
+            <p>Plumage colors include: brown, rufous, gray, white, black, and barred or streaked patterns on the chest and belly.</p>
+            <p>Juvenile hawks (<code>immatures</code>) often have streakier plumage than adults and may take 2&ndash;4 years to develop full adult coloration.</p>
+            <code>Wingspan: 17in - 56in
+Weight: 4oz - 5lb
+Lifespan: up to 25 years</code>
             <ul>
-              <li>Use <code>const</code> by default</li>
-              <li>Use <code>let</code> when reassignment is needed</li>
+              <li>Use <code>tail banding</code> as a key field mark</li>
+              <li>Use <code>belly streaking</code> to help separate juveniles from adults</li>
             </ul>
           </section>
 
           <section class="main-section" id="Functions">
-            <header>Functions</header>
-            <p>Functions are one of the fundamental building blocks in JavaScript. A function is a reusable block of code that performs a task or calculates a value.</p>
-            <p>You can define a function using a function declaration, function expression, or arrow function syntax.</p>
-            <p>Arrow functions provide a shorter syntax for writing functions and do not have their own <code>this</code> context.</p>
-            <p>Functions in JavaScript are first-class objects, meaning they can be assigned to variables, passed as arguments, and returned from other functions.</p>
-            <code>function greet(name) {
-  return `Hello, ${name}!`;
+            <header>Hunting Behavior</header>
+            <p>Hunting is the central activity of a hawk's day. A hawk uses keen vision and patience to locate, stalk, and capture prey ranging from insects to small mammals.</p>
+            <p>You can recognize different hunting styles by watching: soaring high overhead, perch-hunting from a fixed spot, or ambush attacks through dense cover.</p>
+            <p>Accipiters use a shorter, surprise-style attack and do not soar for long periods like buteos do.</p>
+            <p>Hawks are opportunistic, meaning they can adapt their prey choice to whatever is most abundant locally &mdash; rodents, songbirds, reptiles, or even large insects.</p>
+            <code>function hunt(prey) {
+  return spot(prey) &amp;&amp; dive(prey);
 }
 
-const add = (a, b) => a + b;</code>
+const stoop = (height) =&gt; descent(height);</code>
             <ul>
-              <li>Arrow functions are concise and lexically bind <code>this</code></li>
-              <li>Default parameters allow functions to have fallback values</li>
+              <li>Soaring hawks scan from above and dive on prey</li>
+              <li>Perched hawks ambush from a stationary lookout</li>
             </ul>
           </section>
 
           <section class="main-section" id="Control_Flow">
-            <header>Control Flow</header>
-            <p>Control flow is the order in which individual statements, instructions, or function calls are executed or evaluated.</p>
-            <p>JavaScript supports <code>if</code>, <code>else if</code>, and <code>else</code> statements to execute code based on conditions.</p>
-            <p>The <code>switch</code> statement evaluates an expression and matches it against several case clauses.</p>
-            <p>Loops such as <code>for</code>, <code>while</code>, and <code>do...while</code> allow code to be executed repeatedly.</p>
-            <p>The <code>for...of</code> loop iterates over iterable objects like arrays, and <code>for...in</code> iterates over the enumerable properties of an object.</p>
-            <code>for (let i = 0; i &lt; 5; i++) {
-  console.log(i);
+            <header>Habitat and Migration</header>
+            <p>Habitat is the environment in which a hawk hunts, nests, and raises young, and it varies dramatically between species.</p>
+            <p>Hawks live in <code>open fields</code>, <code>dense forests</code>, and <code>urban</code> environments depending on the species.</p>
+            <p>The <code>migration</code> pattern of a species depends on climate, prey availability, and breeding range.</p>
+            <p>Migrations such as <code>fall</code>, <code>spring</code>, and <code>partial</code> movements allow hawks to follow seasonal food and weather.</p>
+            <p>The <code>kettle</code> phenomenon describes hundreds of hawks circling together on rising thermals, and is most famous along ridge lines like Hawk Mountain in Pennsylvania.</p>
+            <code>for (let day = 0; day &lt; 60; day++) {
+  migrate(south);
 }</code>
             <ul>
-              <li>Use <code>===</code> for strict equality checks</li>
-              <li>The ternary operator is a shorthand for simple if/else expressions</li>
+              <li>Use <code>thermals</code> to identify ideal soaring conditions</li>
+              <li>Ridge updrafts are a shorthand route for long-distance migration</li>
             </ul>
           </section>
 
           <section class="main-section" id="Arrays_and_Objects">
-            <header>Arrays and Objects</header>
-            <p>Arrays are ordered collections of values, while objects are unordered collections of key-value pairs.</p>
-            <p>Arrays have useful built-in methods such as <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>forEach</code>, and <code>find</code>.</p>
-            <p>Objects can be created using object literal syntax, constructor functions, or the <code>class</code> keyword introduced in ES6.</p>
-            <p>Destructuring allows you to unpack values from arrays or properties from objects into distinct variables.</p>
-            <p>The spread operator (<code>...</code>) allows an iterable to be expanded, and rest parameters collect multiple function arguments into an array.</p>
-            <code>const fruits = ["apple", "banana", "cherry"];
-const person = { name: "Bob", age: 25 };
-const { name, age } = person;</code>
+            <header>Identification Tips</header>
+            <p>Identifying hawks in the field relies on shape and behavior, while detailed plumage marks confirm the species.</p>
+            <p>Field marks include features such as <code>tail bands</code>, <code>belly bands</code>, <code>wing patches</code>, <code>eye color</code>, and <code>leg color</code>.</p>
+            <p>Buteos can be recognized by broad wings and short tails, or by their habit of soaring in wide circles overhead.</p>
+            <p>Silhouetting allows you to distinguish a hawk from a falcon or vulture even when lighting hides the colors.</p>
+            <p>The flight pattern (<code>flap-flap-glide</code>) is helpful when identifying accipiters in motion, and tail length is often the key shorthand for telling species apart.</p>
+            <code>const buteos = ["Red-tailed", "Red-shouldered", "Broad-winged"];
+const cooper = { name: "Cooper's Hawk", length: 16 };
+const { name, length } = cooper;</code>
             <ul>
-              <li>Use <code>Array.isArray()</code> to check if a value is an array</li>
-              <li>Object methods like <code>Object.keys()</code> and <code>Object.values()</code> are handy for iteration</li>
-              <li>The spread operator simplifies copying and merging arrays and objects</li>
+              <li>Use <code>silhouette</code> to check if a bird is a hawk at all</li>
+              <li>Field marks like <code>tail bands</code> and <code>eye color</code> confirm the species</li>
+              <li>Behavior simplifies identification when plumage is unclear</li>
             </ul>
           </section>
-        </main>
+        </div>
       </div>
     </main>
     <!--Footer-->
