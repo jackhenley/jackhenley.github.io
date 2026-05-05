@@ -7,7 +7,7 @@ const PROCEDURE_FILES = [
     "procedures/percutaneous_biopsy.html",
     "procedures/percutaneous_gastrostomy.html",
     "procedures/picc_line_placement.html",
-    "procedures/vertebroplasty.html",
+    "procedures/vertebroplasty.html"
 ];
 
 async function fetchProcedureTitle(url) {
@@ -15,8 +15,10 @@ async function fetchProcedureTitle(url) {
     const text = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, "text/html");
-    const title = doc.querySelector("title")?.textContent.trim() ?? url;
-    const summary = doc.querySelector(".accordion-content p")?.textContent.trim() ?? "";
+    const titleEl = doc.querySelector("title");
+    const title = titleEl ? titleEl.textContent.trim() : url;
+    const summaryEl = doc.querySelector(".accordion-content p");
+    const summary = summaryEl ? summaryEl.textContent.trim() : "";
     return { title, url, summary };
 }
 
@@ -76,7 +78,7 @@ function renderResults(procedures, query, listEl) {
     }
 
     const lower = query.toLowerCase();
-    const matches = procedures.filter(p => p.title.toLowerCase().includes(lower));
+    const matches = procedures.filter((p) => p.title.toLowerCase().includes(lower));
 
     if (matches.length === 0) {
         const item = document.createElement("li");
@@ -84,7 +86,7 @@ function renderResults(procedures, query, listEl) {
         item.textContent = "No procedures found.";
         listEl.appendChild(item);
     } else {
-        matches.forEach(p => listEl.appendChild(makeProcedureItem(p)));
+        matches.forEach((p) => listEl.appendChild(makeProcedureItem(p)));
     }
 
     listEl.style.display = "block";
@@ -93,7 +95,7 @@ function renderResults(procedures, query, listEl) {
 function renderAllProcedures(procedures, listEl) {
     const sorted = [...procedures].sort((a, b) => a.title.localeCompare(b.title));
     listEl.innerHTML = "";
-    sorted.forEach(p => listEl.appendChild(makeProcedureItem(p)));
+    sorted.forEach((p) => listEl.appendChild(makeProcedureItem(p)));
 }
 
 async function initSearch() {
