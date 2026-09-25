@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dialogue Tree Editor</title>
+<style>
+  :root {
+    --bg: #1e1f26;
+    --panel: #262832;
+    --panel2: #2e303c;
+    --border: #3a3d4a;
+    --text: #e8e8ee;
+    --muted: #9a9caa;
+    --accent: #6c8cff;
+    --accent2: #4a5fd1;
+    --danger: #e0576b;
+    --ok: #4fbf82;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  button:hover { background: var(--accent2); border-color: var(--accent2); }
+  button.danger:hover { background: var(--danger); border-color: var(--danger); }
+  button.primary { background: var(--accent); border-color: var(--accent); font-weight: 600; }
+  button.primary:hover { background: var(--accent2); }
+  input[type=text], input[type=number], textarea, select {
+    font-family: inherit;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    width: 100%;
+  }
+  textarea { font-family: "SF Mono", Menlo, monospace; resize: vertical; }
+  label.field-label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); display: block; margin: 10px 0 4px; }
+
+  #sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    overflow-y: auto;
+  }
+  #sidebar h1 { font-size: 15px; margin: 0 0 10px; }
+  #nodeList { list-style: none; margin: 10px 0; padding: 0; flex: 1; overflow-y: auto; }
+  #nodeList li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    border: 1px solid transparent;
+  }
+  #nodeList li:hover { background: var(--panel2); }
+  #nodeList li.active { background: var(--accent2); border-color: var(--accent); }
+  #nodeList li .key { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #nodeList li .stub-badge { font-size: 10px; color: var(--muted); margin-left: 6px; }
+  #nodeList li.dangling { outline: 1px dashed var(--danger); }
+
+  #main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #topbar {
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: var(--panel);
+  }
+  #topbar .spacer { flex: 1; }
+  #content { flex: 1; overflow-y: auto; padding: 20px; }
+
+  .node-editor { max-width: 760px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .option-card { border-left: 3px solid var(--accent); }
+  .row { display: flex; gap: 8px; align-items: center; }
+  .row + .row { margin-top: 6px; }
+  .kv-row input { flex: 1; }
+  .kv-row input.num { max-width: 90px; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 12px;
+    margin: 3px 4px 0 0;
+  }
+  .chip button { border: none; background: transparent; color: var(--muted); padding: 0; font-size: 14px; line-height: 1; }
+  .chip button:hover { color: var(--danger); background: transparent; }
+  .option-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .option-header .title { font-weight: 600; font-size: 13px; color: var(--muted); }
+  #emptyState { color: var(--muted); padding: 40px; text-align: center; }
+
+  dialog {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 720px;
+    width: 90%;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.5); }
+  dialog textarea { width: 100%; height: 420px; }
+  dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+  #importError { color: var(--danger); font-size: 12px; margin-top: 8px; white-space: pre-wrap; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <h1>Dialogue Tree Editor</h1>
+  <label class="field-label">Function name</label>
+  <input type="text" id="funcNameInput" value="sato" spellcheck="false">
+  <div class="hint">Exports as <code id="funcPreview">function scr_dialogue_sato()</code></div>
+
+  <label class="field-label" style="margin-top:16px;">Nodes</label>
+  <ul id="nodeList"></ul>
+  <button id="addNodeBtn">+ Add node</button>
+</div>
+
+<div id="main">
+  <div id="topbar">
+    <button id="loadBtn">Load .gml</button>
+    <input type="file" id="fileInput" accept=".gml,.txt" style="display:none">
+    <button id="pasteBtn">Paste GML</button>
+    <div class="spacer"></div>
+    <button id="exportBtn" class="primary">Generate GML</button>
+  </div>
+  <div id="content">
+    <div id="emptyState">Select or add a node to begin.</div>
+  </div>
+</div>
+
+<dialog id="pasteDialog">
+  <label class="field-label">Paste .gml source</label>
+  <textarea id="pasteTextarea" spellcheck="false" placeholder="function scr_dialogue_samantha(){ return { ... } }"></textarea>
+  <div id="importError"></div>
+  <div class="dialog-actions">
+    <button id="pasteCancelBtn">Cancel</button>
+    <button id="pasteImportBtn" class="primary">Import</button>
+  </div>
+</dialog>
+
+<dialog id="exportDialog">
+  <label class="field-label">Generated GML</label>
+  <textarea id="exportTextarea" spellcheck="false" readonly></textarea>
+  <div class="dialog-actions">
+    <button id="copyBtn">Copy to clipboard</button>
+    <button id="downloadBtn">Download .gml</button>
+    <button id="exportCloseBtn" class="primary">Close</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+
+/* ---------- Data model ----------
+tree = {
+  funcName: "sato",
+  order: ["stageOne", "howAreYou", ...],
+  nodes: {
+    stageOne: {
+      speaker: "Sato", text: "...",
+      options: [ { label, condition, effects: [{key,val}], flags: [str], next } ]
+    },
+    howAreYou: { stub: true }   // empty {} node
+  }
+}
+------------------------------------ */
+
+const END_SENTINEL = "end";
+const NEW_NODE_PLACEHOLDER = "";
+
+let tree = {
+  funcName: "sato",
+  order: ["stageOne"],
+  nodes: {
+    stageOne: { speaker: "", text: "", options: [] }
+  }
+};
+let activeNode = "stageOne";
+
+const $ = (sel) => document.querySelector(sel);
+const el = (tag, cls, text) => {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+};
+
+function isStub(node) {
+  return !node || node.stub === true;
+}
+
+/* ---------- Sidebar rendering ---------- */
+
+function renderSidebar() {
+  $("#funcNameInput").value = tree.funcName;
+  $("#funcPreview").textContent = `function scr_dialogue_${tree.funcName || "___"}()`;
+
+  const list = $("#nodeList");
+  list.innerHTML = "";
+  const allKeys = new Set(tree.order);
+
+  tree.order.forEach((key) => {
+    const node = tree.nodes[key];
+    const li = el("li");
+    li.dataset.key = key;
+    if (key === activeNode) li.classList.add("active");
+
+    // dangling = referenced by some next but node itself is a stub with no content ever set
+    let dangling = false;
+    Object.values(tree.nodes).forEach((n) => {
+      if (isStub(n)) return;
+      (n.options || []).forEach((o) => {
+        if (o.next === key && isStub(node)) dangling = true;
+      });
+    });
+    if (dangling) li.classList.add("dangling");
+
+    const keySpan = el("span", "key", key);
+    li.appendChild(keySpan);
+    if (isStub(node)) li.appendChild(el("span", "stub-badge", dangling ? "empty ⚠" : "empty"));
+    if (key === "stageOne") li.appendChild(el("span", "stub-badge", "entry"));
+
+    li.addEventListener("click", () => {
+      activeNode = key;
+      renderSidebar();
+      renderContent();
+    });
+    list.appendChild(li);
+  });
+}
+
+function slugForNewNode() {
+  let i = 1;
+  while (tree.nodes["newNode" + i]) i++;
+  return "newNode" + i;
+}
+
+$("#addNodeBtn").addEventListener("click", () => {
+  const key = slugForNewNode();
+  tree.nodes[key] = { speaker: "", text: "", options: [] };
+  tree.order.push(key);
+  activeNode = key;
+  renderSidebar();
+  renderContent();
+});
+
+$("#funcNameInput").addEventListener("input", (e) => {
+  tree.funcName = e.target.value.trim();
+  $("#funcPreview").textContent = `function scr_dialogue_${tree.funcName || "___"}()`;
+});
+
+/* ---------- Node key rename / delete helpers ---------- */
+
+function renameNode(oldKey, newKey) {
+  if (!newKey || newKey === oldKey) return false;
+  if (tree.nodes[newKey]) { alert(`Node "${newKey}" already exists.`); return false; }
+  tree.nodes[newKey] = tree.nodes[oldKey];
+  delete tree.nodes[oldKey];
+  tree.order = tree.order.map((k) => (k === oldKey ? newKey : k));
+  Object.values(tree.nodes).forEach((n) => {
+    (n.options || []).forEach((o) => { if (o.next === oldKey) o.next = newKey; });
+  });
+  if (activeNode === oldKey) activeNode = newKey;
+  return true;
+}
+
+function deleteNode(key) {
+  if (key === "stageOne") { alert('"stageOne" is the required entry node and cannot be deleted.'); return; }
+  if (!confirm(`Delete node "${key}"? Options pointing to it will be cleared.`)) return;
+  delete tree.nodes[key];
+  tree.order = tree.order.filter((k) => k !== key);
+  Object.values(tree.nodes).forEach((n) => {
+    (n.options || []).forEach((o) => { if (o.next === key) o.next = NEW_NODE_PLACEHOLDER; });
+  });
+  if (activeNode === key) activeNode = tree.order[0] || null;
+  renderSidebar();
+  renderContent();
+}
+
+/* ---------- Main content rendering ---------- */
+
+function nextOptionsHtml(selected) {
+  const opts = [`<option value="${NEW_NODE_PLACEHOLDER}" ${!selected ? "selected" : ""}>-- choose node --</option>`];
+  opts.push(`<option value="${END_SENTINEL}" ${selected === END_SENTINEL ? "selected" : ""}>end (reserved)</option>`);
+  tree.order.forEach((k) => {
+    opts.push(`<option value="${k}" ${selected === k ? "selected" : ""}>${k}</option>`);
+  });
+  return opts.join("");
+}
+
+function renderContent() {
+  const content = $("#content");
+  content.innerHTML = "";
+
+  if (!activeNode || !tree.nodes[activeNode]) {
+    content.appendChild(el("div", null, "")).id = "emptyState";
+    $("#content").innerHTML = '<div id="emptyState">Select or add a node to begin.</div>';
+    return;
+  }
+
+  const node = tree.nodes[activeNode];
+  const wrap = el("div", "node-editor");
+
+  // Node header card
+  const headerCard = el("div", "card");
+  const row1 = el("div", "row");
+  const keyLabelWrap = el("div");
+  keyLabelWrap.style.flex = "1";
+  keyLabelWrap.innerHTML = `<label class="field-label">Node key</label>`;
+  const keyInput = el("input");
+  keyInput.type = "text";
+  keyInput.value = activeNode;
+  keyInput.spellcheck = false;
+  keyInput.addEventListener("change", () => {
+    const ok = renameNode(activeNode, keyInput.value.trim());
+    if (!ok) keyInput.value = activeNode;
+    renderSidebar();
+    renderContent();
+  });
+  keyLabelWrap.appendChild(keyInput);
+  row1.appendChild(keyLabelWrap);
+
+  const stubToggleWrap = el("div");
+  stubToggleWrap.innerHTML = `<label class="field-label">&nbsp;</label>`;
+  const stubBtn = el("button", null, isStub(node) ? "Fill in node" : "Make empty stub");
+  stubBtn.addEventListener("click", () => {
+    if (isStub(node)) {
+      tree.nodes[activeNode] = { speaker: "", text: "", options: [] };
+    } else {
+      if (!confirm("Convert this node to an empty stub? Its speaker/text/options will be discarded.")) return;
+      tree.nodes[activeNode] = { stub: true };
+    }
+    renderSidebar();
+    renderContent();
+  });
+  stubToggleWrap.appendChild(stubBtn);
+  row1.appendChild(stubToggleWrap);
+
+  const delWrap = el("div");
+  delWrap.innerHTML = `<label class="field-label">&nbsp;</label>`;
+  const delBtn = el("button", "danger", "Delete node");
+  delBtn.addEventListener("click", () => deleteNode(activeNode));
+  delWrap.appendChild(delBtn);
+  row1.appendChild(delWrap);
+
+  headerCard.appendChild(row1);
+  wrap.appendChild(headerCard);
+
+  if (isStub(node)) {
+    const stubCard = el("div", "card", `"${activeNode}" is an empty stub ({}) — no speaker, text, or options.`);
+    wrap.appendChild(stubCard);
+    content.appendChild(wrap);
+    return;
+  }
+
+  // Speaker / text card
+  const dialogCard = el("div", "card");
+  dialogCard.innerHTML = `<label class="field-label">Speaker</label>`;
+  const speakerInput = el("input");
+  speakerInput.type = "text";
+  speakerInput.value = node.speaker || "";
+  speakerInput.addEventListener("input", (e) => { node.speaker = e.target.value; });
+  dialogCard.appendChild(speakerInput);
+
+  dialogCard.appendChild(el("label", "field-label", "Text"));
+  const textArea = el("textarea");
+  textArea.rows = 3;
+  textArea.value = node.text || "";
+  textArea.addEventListener("input", (e) => { node.text = e.target.value; });
+  dialogCard.appendChild(textArea);
+  wrap.appendChild(dialogCard);
+
+  // Options
+  const optsHeader = el("div", "row");
+  optsHeader.style.justifyContent = "space-between";
+  optsHeader.appendChild(el("label", "field-label", `Options (${node.options.length})`));
+  const addOptBtn = el("button", null, "+ Add option");
+  addOptBtn.addEventListener("click", () => {
+    node.options.push({ label: "", condition: "undefined", effects: [], flags: [], next: NEW_NODE_PLACEHOLDER });
+    renderContent();
+  });
+  optsHeader.appendChild(addOptBtn);
+  wrap.appendChild(optsHeader);
+
+  node.options.forEach((opt, idx) => wrap.appendChild(renderOptionCard(node, opt, idx)));
+
+  content.appendChild(wrap);
+}
+
+function renderOptionCard(node, opt, idx) {
+  const card = el("div", "card option-card");
+  const header = el("div", "option-header");
+  header.appendChild(el("div", "title", `Option ${idx + 1}`));
+  const btns = el("div", "row");
+  const upBtn = el("button", null, "↑");
+  upBtn.disabled = idx === 0;
+  upBtn.addEventListener("click", () => {
+    [node.options[idx - 1], node.options[idx]] = [node.options[idx], node.options[idx - 1]];
+    renderContent();
+  });
+  const downBtn = el("button", null, "↓");
+  downBtn.disabled = idx === node.options.length - 1;
+  downBtn.addEventListener("click", () => {
+    [node.options[idx + 1], node.options[idx]] = [node.options[idx], node.options[idx + 1]];
+    renderContent();
+  });
+  const delBtn = el("button", "danger", "Remove");
+  delBtn.addEventListener("click", () => {
+    node.options.splice(idx, 1);
+    renderContent();
+  });
+  btns.appendChild(upBtn); btns.appendChild(downBtn); btns.appendChild(delBtn);
+  header.appendChild(btns);
+  card.appendChild(header);
+
+  card.appendChild(el("label", "field-label", "Label"));
+  const labelInput = el("input");
+  labelInput.type = "text";
+  labelInput.value = opt.label || "";
+  labelInput.addEventListener("input", (e) => { opt.label = e.target.value; });
+  card.appendChild(labelInput);
+
+  card.appendChild(el("label", "field-label", "Condition (raw GML, e.g. undefined or a function(_char,_loop){...} closure)"));
+  const condArea = el("textarea");
+  condArea.rows = 2;
+  condArea.value = opt.condition || "undefined";
+  condArea.addEventListener("input", (e) => { opt.condition = e.target.value; });
+  card.appendChild(condArea);
+
+  // Effects
+  card.appendChild(el("label", "field-label", "Effects (stat: integer)"));
+  const effectsWrap = el("div");
+  opt.effects.forEach((eff, eIdx) => {
+    const r = el("div", "row kv-row");
+    const kInput = el("input"); kInput.type = "text"; kInput.placeholder = "stat name"; kInput.value = eff.key;
+    kInput.addEventListener("input", (e) => { eff.key = e.target.value; });
+    const vInput = el("input"); vInput.type = "number"; vInput.className = "num"; vInput.value = eff.val;
+    vInput.addEventListener("input", (e) => { eff.val = e.target.value; });
+    const rmBtn = el("button", "danger", "×");
+    rmBtn.addEventListener("click", () => { opt.effects.splice(eIdx, 1); renderContent(); });
+    r.appendChild(kInput); r.appendChild(vInput); r.appendChild(rmBtn);
+    effectsWrap.appendChild(r);
+  });
+  card.appendChild(effectsWrap);
+  const addEffBtn = el("button", null, "+ Add effect");
+  addEffBtn.style.marginTop = "6px";
+  addEffBtn.addEventListener("click", () => { opt.effects.push({ key: "trust", val: 0 }); renderContent(); });
+  card.appendChild(addEffBtn);
+
+  // Flags
+  card.appendChild(el("label", "field-label", "Flags"));
+  const flagsWrap = el("div");
+  opt.flags.forEach((flag, fIdx) => {
+    const chip = el("span", "chip");
+    chip.appendChild(document.createTextNode(flag));
+    const rm = el("button", null, "×");
+    rm.addEventListener("click", () => { opt.flags.splice(fIdx, 1); renderContent(); });
+    chip.appendChild(rm);
+    flagsWrap.appendChild(chip);
+  });
+  card.appendChild(flagsWrap);
+  const flagRow = el("div", "row");
+  flagRow.style.marginTop = "6px";
+  const flagInput = el("input"); flagInput.type = "text"; flagInput.placeholder = "flag_name";
+  const flagAddBtn = el("button", null, "+ Add flag");
+  flagAddBtn.addEventListener("click", () => {
+    const v = flagInput.value.trim();
+    if (v) { opt.flags.push(v); renderContent(); }
+  });
+  flagInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); flagAddBtn.click(); } });
+  flagRow.appendChild(flagInput); flagRow.appendChild(flagAddBtn);
+  card.appendChild(flagRow);
+
+  // Next
+  card.appendChild(el("label", "field-label", 'Next node ("end" redirects to farewell)'));
+  const nextSelect = el("select");
+  nextSelect.innerHTML = nextOptionsHtml(opt.next);
+  nextSelect.addEventListener("change", (e) => { opt.next = e.target.value; });
+  card.appendChild(nextSelect);
+
+  return card;
+}
+
+/* ---------- Export ---------- */
+
+function gmlStringLiteral(str) {
+  return '"' + String(str).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+}
+
+function serializeOption(opt, indent) {
+  const pad = "  ".repeat(indent);
+  const pad2 = "  ".repeat(indent + 1);
+  const lines = [];
+  lines.push(`${pad}{ label: ${gmlStringLiteral(opt.label || "")},`);
+  lines.push(`${pad2}condition: ${opt.condition && opt.condition.trim() ? opt.condition.trim() : "undefined"},`);
+  const effParts = (opt.effects || [])
+    .filter((e) => e.key && e.key.trim())
+    .map((e) => `${e.key.trim()}: ${e.val}`);
+  lines.push(`${pad2}effects: {${effParts.join(", ")}},`);
+  if (opt.flags && opt.flags.length) {
+    lines.push(`${pad2}flags: [${opt.flags.map(gmlStringLiteral).join(", ")}],`);
+  }
+  const nextVal = opt.next && opt.next.trim() ? opt.next.trim() : END_SENTINEL;
+  lines.push(`${pad2}next: ${gmlStringLiteral(nextVal)} }`);
+  return lines.join("\n");
+}
+
+function serializeNode(key, node, indent) {
+  const pad = "  ".repeat(indent);
+  const pad2 = "  ".repeat(indent + 1);
+  if (isStub(node)) {
+    return `${pad}${key}: {}`;
+  }
+  const optLines = (node.options || []).map((o) => serializeOption(o, indent + 2));
+  const optionsBlock = optLines.length
+    ? `[\n${optLines.join(",\n")}\n${pad2}]`
+    : `[]`;
+  return `${pad}${key}: {\n${pad2}speaker: ${gmlStringLiteral(node.speaker || "")},\n${pad2}text: ${gmlStringLiteral(node.text || "")},\n${pad2}options: ${optionsBlock}}`;
+}
+
+function serializeTree() {
+  const nodeLines = tree.order.map((k) => serializeNode(k, tree.nodes[k], 2));
+  const fname = tree.funcName && tree.funcName.trim() ? tree.funcName.trim() : "untitled";
+  return [
+    `function scr_dialogue_${fname}(){`,
+    `\treturn {`,
+    nodeLines.join(",\n\n"),
+    `\t};`,
+    `}`
+  ].join("\n");
+}
+
+$("#exportBtn").addEventListener("click", () => {
+  $("#exportTextarea").value = serializeTree();
+  $("#exportDialog").showModal();
+});
+$("#exportCloseBtn").addEventListener("click", () => $("#exportDialog").close());
+$("#copyBtn").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("#exportTextarea").value);
+    $("#copyBtn").textContent = "Copied!";
+    setTimeout(() => { $("#copyBtn").textContent = "Copy to clipboard"; }, 1200);
+  } catch (err) {
+    $("#exportTextarea").select();
+    document.execCommand("copy");
+  }
+});
+$("#downloadBtn").addEventListener("click", () => {
+  const fname = tree.funcName && tree.funcName.trim() ? tree.funcName.trim() : "untitled";
+  const blob = new Blob([$("#exportTextarea").value], { type: "text/plain" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `scr_dialogue_${fname}.gml`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ---------- Import parser ----------
+Tolerant brace-aware scanner tailored to this schema's shape. Not a general
+GML parser: it locates `return { ... }`, splits top-level `key: { ... }`
+node entries, then within each node splits `options: [ ... ]` into
+`{ ... }` option entries, extracting label/condition/effects/flags/next by
+field name. `condition` is captured as raw source text (including
+multi-line function bodies) and round-tripped verbatim.
+------------------------------------------------------------------ */
+
+class ParseError extends Error {}
+
+// Strip // and /* */ comments, string-aware, replacing removed text with
+// spaces (not deletion) so character offsets/line numbers stay stable.
+function stripComments(src) {
+  let out = "";
+  for (let i = 0; i < src.length; i++) {
+    const c = src[i];
+    const c2 = src[i + 1];
+    if (c === '"' || c === "'") {
+      const quote = c;
+      out += c;
+      i++;
+      while (i < src.length && src[i] !== quote) {
+        out += src[i];
+        if (src[i] === "\\") { i++; out += src[i]; }
+        i++;
+      }
+      if (i < src.length) out += src[i];
+      continue;
+    }
+    if (c === "/" && c2 === "/") {
+      while (i < src.length && src[i] !== "\n") { out += " "; i++; }
+      if (i < src.length) out += "\n"; // keep the newline itself
+      continue;
+    }
+    if (c === "/" && c2 === "*") {
+      out += "  ";
+      i += 2;
+      while (i < src.length && !(src[i] === "*" && src[i + 1] === "/")) {
+        out += (src[i] === "\n" ? "\n" : " ");
+        i++;
+      }
+      out += "  ";
+      i++; // skip the "/" of "*/"; loop's i++ skips past it entirely
+      continue;
+    }
+    out += c;
+  }
+  return out;
+}
+
+function findMatchingBrace(src, openIdx, openCh, closeCh) {
+  let depth = 0;
+  for (let i = openIdx; i < src.length; i++) {
+    const c = src[i];
+    if (c === openCh) depth++;
+    else if (c === closeCh) {
+      depth--;
+      if (depth === 0) return i;
+    } else if (c === '"' || c === "'") {
+      // skip string literal
+      const quote = c;
+      i++;
+      while (i < src.length && src[i] !== quote) {
+        if (src[i] === "\\") i++;
+        i++;
+      }
+    }
+  }
+  throw new ParseError(`Unmatched "${openCh}" starting at position ${openIdx}`);
+}
+
+// Split top-level comma-separated entries inside a { ... } or [ ... ] body,
+// respecting nested braces/brackets and string literals.
+function splitTopLevel(body) {
+  const parts = [];
+  let depth = 0;
+  let cur = "";
+  for (let i = 0; i < body.length; i++) {
+    const c = body[i];
+    if (c === '"' || c === "'") {
+      const quote = c;
+      cur += c;
+      i++;
+      while (i < body.length && body[i] !== quote) {
+        cur += body[i];
+        if (body[i] === "\\") { i++; cur += body[i]; }
+        i++;
+      }
+      if (i < body.length) cur += body[i];
+      continue;
+    }
+    if ("{[(".includes(c)) depth++;
+    if ("}])".includes(c)) depth--;
+    if (c === "," && depth === 0) {
+      parts.push(cur);
+      cur = "";
+    } else {
+      cur += c;
+    }
+  }
+  if (cur.trim()) parts.push(cur);
+  return parts.map((p) => p.trim()).filter((p) => p.length);
+}
+
+function stripStringLiteral(str) {
+  const s = str.trim();
+  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+    return s.slice(1, -1).replace(/\\(.)/g, "$1");
+  }
+  return s;
+}
+
+function extractField(body, fieldName) {
+  const re = new RegExp(`(^|[,{\\s])${fieldName}\\s*:`, "g");
+  const m = re.exec(body);
+  if (!m) return null;
+  let start = m.index + m[0].length;
+  // find end: next top-level comma or end of body, respecting nesting/strings
+  let depth = 0;
+  let i = start;
+  for (; i < body.length; i++) {
+    const c = body[i];
+    if (c === '"' || c === "'") {
+      const quote = c;
+      i++;
+      while (i < body.length && body[i] !== quote) {
+        if (body[i] === "\\") i++;
+        i++;
+      }
+      continue;
+    }
+    if ("{[(".includes(c)) depth++;
+    if ("}])".includes(c)) {
+      if (depth === 0) break;
+      depth--;
+    }
+    if (c === "," && depth === 0) break;
+  }
+  return body.slice(start, i).trim();
+}
+
+function parseEffects(str) {
+  if (!str) return [];
+  const trimmed = str.trim();
+  const inner = trimmed.startsWith("{") ? trimmed.slice(1, trimmed.lastIndexOf("}")) : trimmed;
+  return splitTopLevel(inner).map((entry) => {
+    const idx = entry.indexOf(":");
+    if (idx === -1) throw new ParseError(`Malformed effects entry: "${entry}"`);
+    return { key: entry.slice(0, idx).trim(), val: parseInt(entry.slice(idx + 1).trim(), 10) || 0 };
+  });
+}
+
+function parseFlags(str) {
+  if (!str) return [];
+  const trimmed = str.trim();
+  const inner = trimmed.startsWith("[") ? trimmed.slice(1, trimmed.lastIndexOf("]")) : trimmed;
+  return splitTopLevel(inner).map(stripStringLiteral);
+}
+
+function parseOption(body) {
+  const label = extractField(body, "label");
+  const condition = extractField(body, "condition");
+  const effects = extractField(body, "effects");
+  const flags = extractField(body, "flags");
+  const next = extractField(body, "next");
+  return {
+    label: label !== null ? stripStringLiteral(label) : "",
+    condition: condition !== null ? condition.trim() : "undefined",
+    effects: parseEffects(effects || "{}"),
+    flags: parseFlags(flags || "[]"),
+    next: next !== null ? stripStringLiteral(next) : NEW_NODE_PLACEHOLDER
+  };
+}
+
+function parseOptionsArray(str) {
+  if (!str) return [];
+  const trimmed = str.trim();
+  if (!trimmed.startsWith("[")) throw new ParseError(`Expected "options" to start with "[", got: ${trimmed.slice(0, 30)}`);
+  const closeIdx = findMatchingBrace(trimmed, 0, "[", "]");
+  const inner = trimmed.slice(1, closeIdx);
+  return splitTopLevel(inner).map((entry) => {
+    const t = entry.trim();
+    if (!t.startsWith("{")) throw new ParseError(`Expected option entry to start with "{", got: ${t.slice(0, 30)}`);
+    const end = findMatchingBrace(t, 0, "{", "}");
+    return parseOption(t.slice(1, end));
+  });
+}
+
+function parseNodeBody(body) {
+  const trimmed = body.trim();
+  if (trimmed === "") return { stub: true };
+  const speaker = extractField(body, "speaker");
+  const text = extractField(body, "text");
+  const optionsRaw = extractField(body, "options");
+  if (speaker === null && text === null && optionsRaw === null) {
+    return { stub: true };
+  }
+  return {
+    speaker: speaker !== null ? stripStringLiteral(speaker) : "",
+    text: text !== null ? stripStringLiteral(text) : "",
+    options: optionsRaw !== null ? parseOptionsArray(optionsRaw) : []
+  };
+}
+
+function parseGml(rawSrc) {
+  const src = stripComments(rawSrc);
+  const fnMatch = /function\s+scr_dialogue_(\w+)\s*\(\s*\)\s*\{/.exec(src);
+  if (!fnMatch) throw new ParseError('Could not find "function scr_dialogue_<name>() {" in the source.');
+  const funcName = fnMatch[1];
+
+  const retMatch = /return\s*\{/.exec(src.slice(fnMatch.index));
+  if (!retMatch) throw new ParseError('Could not find "return {" inside the function.');
+  const returnBraceIdx = fnMatch.index + retMatch.index + retMatch[0].length - 1;
+  const closeIdx = findMatchingBrace(src, returnBraceIdx, "{", "}");
+  const body = src.slice(returnBraceIdx + 1, closeIdx);
+
+  const entries = splitTopLevel(body);
+  const order = [];
+  const nodes = {};
+  entries.forEach((entry) => {
+    const m = /^([A-Za-z_$][\w$]*)\s*:\s*\{/.exec(entry);
+    if (!m) throw new ParseError(`Could not parse node entry starting with: ${entry.slice(0, 40)}`);
+    const key = m[1];
+    const openIdx = m[0].length - 1;
+    const nodeCloseIdx = findMatchingBrace(entry, openIdx, "{", "}");
+    const nodeBody = entry.slice(openIdx + 1, nodeCloseIdx);
+    order.push(key);
+    nodes[key] = parseNodeBody(nodeBody);
+  });
+
+  if (!order.length) throw new ParseError("No dialogue nodes found in the parsed struct.");
+  return { funcName, order, nodes };
+}
+
+/* ---------- Import UI wiring ---------- */
+
+$("#loadBtn").addEventListener("click", () => $("#fileInput").click());
+$("#fileInput").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    $("#pasteTextarea").value = reader.result;
+    $("#importError").textContent = "";
+    $("#pasteDialog").showModal();
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+$("#pasteBtn").addEventListener("click", () => {
+  $("#importError").textContent = "";
+  $("#pasteDialog").showModal();
+});
+$("#pasteCancelBtn").addEventListener("click", () => $("#pasteDialog").close());
+
+$("#pasteImportBtn").addEventListener("click", () => {
+  const src = $("#pasteTextarea").value;
+  try {
+    const parsed = parseGml(src);
+    tree = parsed;
+    activeNode = tree.order[0];
+    $("#importError").textContent = "";
+    $("#pasteDialog").close();
+    renderSidebar();
+    renderContent();
+  } catch (err) {
+    $("#importError").textContent = "Import failed: " + err.message +
+      "\n\nThe source may use a construct outside this tool's supported schema shape " +
+      "(speaker/text/options with label/condition/effects/flags/next). Fix the source " +
+      "or edit it manually rather than trusting a partial import.";
+  }
+});
+
+/* ---------- Init ---------- */
+renderSidebar();
+renderContent();
+</script>
+</body>
+</html>
